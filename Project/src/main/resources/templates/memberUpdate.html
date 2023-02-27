@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+<title>개인정보 수정</title>
+
+<link th:href="@{/css/header.css}" rel="stylesheet" />
+<link th:href="@{/css/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/productupdate.css}" rel="stylesheet" />
+<link th:href="@{/css/reset2.css}" rel="stylesheet" />
+<link th:href="@{/css/reset.css}" rel="stylesheet" />
+<link th:href="@{/css/memberUpdate.css}" rel="stylesheet" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css" />
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/header.js}"></script>
+<script type="text/javascript" th:src="@{/js/memberUpdate2.js}"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" th:src="@{/js/memberUpdate.js}"></script>
+<!-- 수정할 곳 *********************** -->
+</head>
+<body>
+	<header th:replace="header :: header"> </header>
+
+	<h1>내 정보 수정</h1>
+	<main>
+		<!-- 	div id="container">	-->
+		<form class="updateForm" name="update_form" id="update_form" th:action="@{/members/put}" th:method="put">
+
+			<!--legend class="skip"> 회원정보수정    </legend>  -->
+			<ul>
+				<li>
+					<span class="img">아이디(이메일) </span>
+					<span>
+						<input type="text" id="m_email" name="m_email" th:value="${member.m_email}" readonly>
+					</span>
+				</li>
+
+
+
+				<li class="error email_error" id="check_email">이메일 에러</li>
+				<li>
+					<span class="img" id="pwd_bg"> 새 비밀번호 </span>
+					<span>
+						<input type="password" name="m_pwd" id="m_pwd" data-name="비밀번호" placeholder="비밀번호">
+					</span>
+					<div class="show-hide">
+						<span class="pwd-show" title="비밀번호 보이기">
+							<i class="bi bi-eye-fill"></i>
+						</span>
+						<span class="pwd-hide" title="비밀번호 가리기">
+							<i class="bi bi-eye-slash"></i>
+						</span>
+					</div>
+				</li>
+				<li class="error pwd_error">비밀번호 에러</li>
+
+
+				<li>
+					<span class="img" id="pwd2_bg"> 비밀번호 확인 </span>
+					<span>
+						<input type="password" name="m_pwd2" id="m_pwd2" data-name="비밀번호확인" placeholder="비밀번호확인">
+					</span>
+					<div class="show-hide2">
+						<span class="pwd-show2" title="비밀번호 보이기">
+							<i class="bi bi-eye-fill"></i>
+						</span>
+						<span class="pwd-hide2" title="비밀번호 가리기">
+							<i class="bi bi-eye-slash"></i>
+						</span>
+					</div>
+				</li>
+				<li class="error pwd2_error">비밀번호가 일치하지 않습니다</li>
+
+
+				<li class="nick">
+					<span class="img"> 닉네임 </span>
+					<span class="btn_box_name">
+						<input type="text" id="m_nick" name="m_nickname" placeholder="닉네임 입력" th:value="${member.m_nickname}">
+						<input type="button" class="button" id="nick_check" value="중복확인">
+					</span>
+				</li>
+				<li class="error nick_error" id="check_ nick">닉네임 에러</li>
+
+
+
+				<li>
+					<span class="img"> 이름 </span>
+					<span>
+						<input type="text" id="m_name" name="m_name" placeholder="변경할 이름 입력" th:value="${member.m_name}">
+					
+					</span>
+				</li>
+				<li class="error name_error" id="check_ name">이름 에러</li>
+
+				<li>
+
+					<span class="img"> 우편번호 </span>
+					<div class="btn_box_name">
+						<input class="address_text1" name="addr1" id="addr1" type="text" th:value="${addr1}" placeholder="우편 번호" readonly>
+						<button id="api_btn" onclick="execPostCode();" type="button">우편번호 찾기</button>
+					</div>
+				</li>
+
+
+						<li>
+							<span class="img">도로명 주소</span>
+					<input class="address_text2" name="addr2" id="addr2" type="text" th:value="${addr2}" placeholder="도로명 주소" readonly>
+					</li>
+
+						<li>
+							<span class="img">상세 주소</span>
+					<input class="address_text2" name="addr3" id="addr3" type="text" th:value="${addr3}" laceholder="상세주소">
+					</li>
+				<li>
+					<span class="img">전화번호 </span>
+					<span>
+						<input type="text" name="m_tel" id="chk_tel" th:value="${member.m_tel}">
+					</span>
+				</li>
+				<li class="error tel_error" id="check_ tel">전화번호 - 제외 소스</li>
+
+
+
+				<input type="button" id="update_btn" name="update_btn" value="수정완료">
+
+			</ul>
+
+		</form>
+
+		<form class="Delete" id="Delete" name="deleteform" th:action="@{/members/info}" th:method="delete">
+			<input type="button" class="join_link" value="탈퇴하기"> 
+			<input type="hidden" name="m_email" th:value="${member.m_email}">
+		</form>
+	</main>
+
+	<footer> &copy; DoGaTher Corp. All rights reserved.</footer>
+
+
+</body>
+
+</html>

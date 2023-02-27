@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link th:href="@{/css/header.css}" rel="stylesheet" />
+<link th:href="@{/css/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/purchase.css}" rel="stylesheet" />
+<link th:href="@{/css/reset2.css}" rel="stylesheet" />
+<link th:href="@{/css/reset.css}" rel="stylesheet" />
+<link th:href="@{/css/purchase.css}" rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/header.js}"></script>
+</head>
+<body>
+	<div class="container">
+		<header th:replace="header :: header"> </header>
+		<form th:action="@{/ordersheet}" method="post">
+
+			<div class="color_green">
+				<label for="">수령인</label> 
+				<input type="text" name="o_recipient" id="o_recipient" required="required" />
+			</div>
+
+			<div class="color_green">
+				<label for="o_phoneNumber">수령인 연락처</label> 
+				<input type="text" name="o_phoneNumber" id="o_phoneNumber" required="required" />
+			</div>
+
+			<div class="color_green">
+				<label for="o_address">주소</label> 
+				<input type="text" name="o_address" id="o_address" required="required" />
+			</div>
+			<div>
+				<button type="submit">주문</button>
+				<button type="reset">취소</button>
+			</div>
+		</form>
+	</div>
+	<footer th:replace="footer ::footer"></footer>
+</body>
+</html>

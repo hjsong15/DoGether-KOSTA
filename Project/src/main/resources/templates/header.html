@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<header id="header_con" th:fragment="header">
+		<div class="header_con_box">
+			<div class="header_category_box">
+
+				<span class="material-symbols-outlined"> menu </span>
+				<span> 카테고리 </span>
+
+				<ul class="category_drop_menu">
+					<li><a href="/index/list">전체</a></li>
+					<li><a href="/index/category?p_category=패션의류-잡화">패션의류/잡화</a></li>
+					<li><a href="/index/category?p_category=뷰티">뷰티</a></li>
+					<li><a href="/index/category?p_category=출산-유아동">출산/유아동</a></li>
+					<li><a href="/index/category?p_category=식품">식품</a></li>
+					<li><a href="/index/category?p_category=주방용품">주방용품</a></li>
+					<li><a href="/index/category?p_category=생활용품">생활용품</a></li>
+					<li><a href="/index/category?p_category=홈인테리어">홈인테리어</a></li>
+					<li><a href="/index/category?p_category=가전디지털">가전디지털</a></li>
+					<li><a href="/index/category?p_category=스포츠-레저">스포츠/레저</a></li>
+					<li><a href="/index/category?p_category=자동차용품">자동차용품</a></li>
+					<li><a href="/index/category?p_category=도서-음반">도서/음반/DVD</a></li>
+					<li><a href="/index/category?p_category=완구-취미">완구/취미</a></li>
+					<li><a href="/index/category?p_category=문구-오피스">문구/오피스</a></li>
+					<li><a href="/index/category?p_category=반려동물용품">반려동물용품</a></li>
+					<li><a href="/index/category?p_category=헬스-건강식품">헬스/건강식품</a></li>
+
+				</ul>
+			</div>
+
+			<div class="header_logo_box">
+				<a href="/">
+					<img src="/projectimg/logo.png">
+				</a>
+			</div>
+
+			<div class="header_search_box">
+				<form class="search_form" action="/search" name="Search_form" method="get">
+					<select class="search_form_select" th:name="keyword">
+						<option value="total">전체</option>
+						<option value="패션의류-잡화">패션의류/잡화</option>
+						<option value="뷰티">뷰티</option>
+						<option value="출산-유아동">출산/유아동</option>
+						<option value="식품">식품</option>
+						<option value="주방용품">주방용품</option>
+						<option value="생활용품">생활용품</option>
+						<option value="홈인테리어">홈인테리어</option>
+						<option value="가전디지털">가전디지털</option>
+						<option value="스포츠-레저">스포츠/레저</option>
+						<option value="자동차용품">자동차용품</option>
+						<option value="도서-음반">도서/음반/DVD</option>
+						<option value="완구-취미">완구/취미</option>
+						<option value="문구-오피스">문구/오피스</option>
+						<option value="반려동물용품">반려동물용품</option>
+						<option value="헬스-건강식품">헬스/건강식품</option>
+					</select>
+					<input type="search" th:name="search" class="search_form_text" id="search">
+					<button type="button" class="search_img" id="search_bt">
+						<span class="material-symbols-outlined"> search </span>
+					</button>
+				</form>
+
+			</div>
+			<div class="header_mymenu">
+
+				<div class="header_icon">
+					<div class="header_mymenu_drop">
+						<span class="material-symbols-outlined mymenu_img"> person </span>
+						<span class="mymenu_text"> MY </span>
+						<ul class="mymenu_drop_menu1">
+
+							<li sec:authorize="isAnonymous()"><a th:href="@{/members/join}">회원가입</a></li>
+							<li sec:authorize="isAnonymous()"><a th:href="@{/members}">로그인</a></li>
+
+							<li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/members/put}">내 정보수정</a></li>
+							<li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/orders/buylists}">구매내역</a></li>
+							<li sec:authorize="hasRole('ROLE_USER')">
+								<form th:action="|/members/logout|" th:method="post" class="logoutform">
+									<a href="javascript:void(0)" class="logout_href">로그아웃</a>
+								</form>
+							</li>
+
+
+							<li sec:authorize="hasRole('ROLE_SELLER')"><a th:href="@{/products/all/lists}">제품 관리</a></li>
+							<li sec:authorize="hasRole('ROLE_SELLER')"><a th:href="@{/products}">제품등록</a></li>
+							<li sec:authorize="hasRole('ROLE_SELLER')"><a th:href="@{/orders/buylists}">구매내역</a></li>
+							<li sec:authorize="hasRole('ROLE_SELLER')"><a th:href="@{/members/put}">내 정보수정</a></li>
+							<li sec:authorize="hasRole('ROLE_SELLER')">
+								<form th:action="|/members/logout|" th:method="post" class="logoutform">
+									<a href="javascript:void(0)" class="logout_href">로그아웃</a>
+								</form>
+							</li>
+
+							<li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin}">관리자 페이지</a></li>							
+							<li sec:authorize="hasRole('ROLE_ADMIN')">
+								<form th:action="|/members/logout|" th:method="post" class="logoutform">
+									<a href="javascript:void(0)" class="logout_href">로그아웃</a>
+								</form>
+							</li>
+
+
+
+						</ul>
+					</div>
+
+					<div class="header_mymenu_drop2">
+						<span class="material-symbols-outlined mymenu_img"> shopping_cart </span>
+						<span class="mymenu_text"> 장바구니 </span>
+						<ul class="mymenu_drop_menu2">
+							<li sec:authorize="isAnonymous()"><a th:href="@{/member/login}">로그인이 필요</a></li>
+							<li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/orders/carts}">장바구니</a></li>
+							<li sec:authorize="hasRole('ROLE_SELLER')"><a th:href="@{/orders/carts}">장바구니</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="hedaer_idname" sec:authorize="isAuthenticated()">
+				<p th:text="|${#authentication.name}님 로그인|"></p>
+			</div>
+			<div class="hedaer_idname" sec:authorize="isAnonymous()">
+				<p>비 로그인유저</p>
+			</div>
+		</div>
+	</header>
+
+</body>
+</html>

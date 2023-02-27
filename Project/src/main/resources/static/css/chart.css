@@ -1,0 +1,172 @@
+#container {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	position: relative;
+}
+
+#chart_main_con {
+	position:relative;
+	width: 100%;
+	padding-top: 170px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.chart_box {
+	flex-direction: column;
+	width: 1200px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	margin: 50px;
+}
+
+.chart_line {
+	width: 1100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.chart_text_box {
+	width: 1100px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.chart_text {
+	width: 200px;
+	height: 100px;
+	border: 1px solid #e2e2e2;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+}
+.chart_text span{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	
+}
+
+.chart_text a {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: underline;
+}
+
+.type {
+	margin: 25px;
+	width: 500px;
+	display: flex;
+	height: 300px;
+	border: 1px solid #e2e2e2;
+	align-items: center;
+	justify-content: center;
+}
+
+.type_circle {
+	flex-direction: column;
+}
+
+.chart_btn {
+	width: 500px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.chart_btn a {
+	cursor: pointer;
+	width: 200px;
+	height: 50px;
+	border: 1px solid #e2e2e2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 20px;
+	border-radius: 10px;
+}
+
+.chart_btn a:hover {
+	color: white;
+	background-color: blue;
+}
+
+.chart_modal_con{
+	flex-direction:column;
+	position:fixed;
+	top:150px;
+	width:900px;
+	height: 500px;
+	overflow: auto;
+	display: none;
+	align-items: center;
+	justify-content: flex-start;
+	background-color: black;
+	opacity: 0.7;
+	padding:30px;
+}
+
+.chart_modal_box{
+	
+	width:800px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+.modal_tagbox{
+	color:white;
+	width:100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.modal_tag1,.modal_tag2{
+	width:100px;
+	height: 60px;
+	display: flex;
+	font-size:12px;
+	align-items: center;
+	justify-content:center;
+}
+.modal_tag3,.modal_tag4{
+	width:225px;
+	height: 60px;
+	display: flex;
+	font-size:12px;
+	align-items: center;
+	justify-content:center;
+}
+.modal_tag5{
+	width:150px;
+	height: 60px;
+	display: flex;
+	font-size:12px;
+	align-items: center;
+	justify-content:center;
+}
+
+.chart_modal_text{
+	font-size:20px;
+	font-weight:bold;
+	color:white;
+	width:100%;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

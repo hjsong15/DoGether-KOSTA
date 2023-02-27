@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link th:href="@{/css/header.css}" rel="stylesheet" />
+<link th:href="@{/css/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/mypage.css}" rel="stylesheet" />
+<link th:href="@{/css/reset2.css}" rel="stylesheet" />
+<link th:href="@{/css/reset.css}" rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap"
+	rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script type="text/javascript" th:src="@{/js/header.js}"></script>
+<script type="text/javascript" th:src="@{/js/mypage.js}"></script>
+</head>
+
+<body>
+	<header th:replace="header :: header"> </header>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	
+	<th:block th:if="${#lists.isEmpty(qnaListMap)}">
+			<span th:text="|등록된 문의가 없습니다.|"></span>
+	</th:block>
+	
+	<th:block th:if="${!#lists.isEmpty(qnaListMap)}">
+		<div id="qna_title" class="qna_show">
+			<span th:text="|상품 id|"></span>
+<!-- 			<span th:text="|작성날짜|"></span> -->
+			<span th:text="|제목|"></span>
+<!-- 			<span th:text="|내용|"></span> -->
+		</div>
+
+		<div th:each="qna:${qnaListMap}">
+			<span th:text="${qna['q_id']}"></span>
+			<a th:href="|/qnaboard/${qna['q_id']}|" th:text="${qna['q_title']}"></a>
+<!-- 			<span th:text="${qna['q_content']}"></span> -->
+<!-- 			<span th:text="${qna['q_nickname_m_fk']}"></span> -->
+<!-- 			<span th:text="${qna['q_date']}"></span> -->
+<!-- 			<span th:text="${qna['q_answer']}"></span> -->
+		</div>
+	</th:block>
+</body>
+
+</html>

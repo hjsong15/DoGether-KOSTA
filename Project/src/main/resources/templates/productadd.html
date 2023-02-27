@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link th:href="@{/css/header.css}" rel="stylesheet" />
+<link th:href="@{/css/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/productadd.css}" rel="stylesheet" />
+<link th:href="@{/css/reset2.css}" rel="stylesheet" />
+<link th:href="@{/css/reset.css}" rel="stylesheet" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/header.js}"></script>
+<script type="text/javascript" th:src="@{/js/productadd.js}"></script>
+
+</head>
+
+<body>
+	<div id="container">
+		<header th:replace="header :: header"> </header>
+		<main id="productadd_main_con">
+
+
+			<form class="productadd_form" id="product_form" th:action="@{/products}" th:method="POST" enctype="multipart/form-data">
+				<h1>제품 등록</h1>
+
+				<label class="input_tag">
+					<input type="text" name="p_name" placeholder="제품명 입력" data-name="제품명">
+				</label>
+				<label class="input_tag">
+					<input type="text" name="p_price" placeholder="기본 가격 입력" data-name="가격">
+				</label>
+
+				<label class="input_tag">
+					<span>상품 카테고리:</span>
+					<select name="p_category">
+						<option value="패션의류-잡화">패션의류-잡화</option>
+						<option value="뷰티">뷰티</option>
+						<option value="출산-유아동">출산-유아동</option>
+						<option value="식품">식품</option>
+						<option value="주방용품">주방용품</option>
+						<option value="생활용품">생활용품</option>
+						<option value="홈인테리어">홈인테리어</option>
+						<option value="가전디지털">가전디지털</option>
+						<option value="스포츠-레저">스포츠-레저</option>
+						<option value="자동차용품">자동차용품</option>
+						<option value="도서-음반-DVD">도서-음반-DVD</option>
+						<option value="완구-취미">완구-취미</option>
+						<option value="문구-오피스">문구-오피스</option>
+						<option value="반려동물용품">반려동물용품</option>
+						<option value="헬스-건강식품">헬스-건강식품</option>
+					</select>
+				</label>
+
+				<label class="input_tag">
+					<input type="text" name="p_nickname_m_fk" th:value="${memberEmail}" data-name="판매자" readonly>
+				</label>
+				<div class="img_con">
+					<label class="img_box">
+						<span>대표 이미지(클릭)</span>
+						<span class="material-symbols-outlined">upload </span>
+						<input type="file" multiple="multiple" name="p_img" style="display: none;" data-name="대표 이미지" accept="image/gif, image/jpeg, image/png">
+					</label>
+
+					<label class="contentimg_box">
+						<span>상세 이미지(클릭)</span>
+						<span class="material-symbols-outlined">upload </span>
+						<input type="file" multiple="multiple" name="p_contentimg" style="display: none;" data-name="상세 이미지" accept="image/gif, image/jpeg, image/png">
+					</label>
+				</div>
+				<div class="input_tag_discount">
+					<div class="discount_text">
+						<span>수량별 할인율 설정</span>
+						<button type="button" id="discount_btn">+</button>
+						<button type="button" id="discount_revbtn">-</button>
+					</div>
+					<div class="discount_add">
+						<span>설정:</span>
+						<input type="text" name="p_discount_quan" placeholder="할인 기준 수량" data-name="기준 수량" class="disquan">
+						<input type="text" name="p_discount_count" placeholder="할인율" data-name="할인율" class="discount">
+					</div>
+
+				</div>
+
+				<label class="productadd_time">
+					<span>모집 시작일자:</span>
+					<input type="datetime-local" name="p_recruitdate" class="recruidate">
+				</label>
+				<label class="productadd_time">
+					<span>모집 마감일자:</span>
+					<input type="datetime-local" name="p_duedate" class="duedate">
+
+				</label>
+
+				<button type="button" id="addpro_btn">제품 등록완료</button>
+			</form>
+		</main>
+
+		<footer th:replace="footer ::footer"></footer>
+
+	</div>
+</body>
+
+</html>

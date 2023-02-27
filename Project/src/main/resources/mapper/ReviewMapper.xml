@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.ReviewMapper">
+	
+	<resultMap type="com.project.model.Review" id="ReviewMap">
+		<id property="r_id" column="r_id"/>
+		<result property="r_nickname_m_fk" column="r_nickname_m_fk"/>
+		<result property="r_content" column="r_content"/>
+		<result property="r_date" column="r_date"/>
+		<result property="r_datetxt" column="r_datetxt"/>
+		<result property="r_rating" column="r_rating"/>
+		<result property="r_pnickname_m_fk" column="r_pnickname_m_fk"/>
+		<collection property="img" column="r_id" javaType="java.util.ArrayList" ofType="com.project.model.Img" select="getImg" />
+	</resultMap>
+	
+	<resultMap type="com.project.model.Img" id="ImgMap">
+		<id property="img_id" column="img_id" />
+		<result property="img_name" column="img_name" />
+		<result property="img_origname" column="img_origname" />
+		<result property="img_rid_r_fk" column="img_rid_r_fk" />
+		<result property="img_keyword" column="img_keyword" />
+	</resultMap>
+	
+	<resultMap type="com.project.model.Member" id="MemberMap">
+		<id property="m_id" column="m_id"/>
+		<result property="m_email" column="m_email"/>
+		<collection property="order" column="m_id" javaType="java.util.ArrayList" ofType="com.project.model.Order" select="getOrder" />
+	</resultMap>
+	
+	<resultMap type="com.project.model.Order" id="OrderMap">
+		<id property="o_id" column="o_id"/>
+		<result property="o_member_m_fk" column="o_member_m_fk"/>
+		<result property="o_product_p_fk" column="o_product_p_fk"/>
+	</resultMap>
+	
+	<select id="getOrder" resultMap="OrderMap" parameterType="int">
+		SELECT * FROM ord o_member_m_fk WHERE =#{m_id}
+	</select>
+	
+	
+	<!-- img join -->
+	<select id="getImg" resultMap="ImgMap" parameterType="int">
+		SELECT * FROM img WHERE img_rid_r_fk=#{r_id}
+		ORDER BY img_id
+	</select>
+	
+	<insert id="AddReview" parameterType="com.project.model.Review" useGeneratedKeys="true" keyProperty="r_id">
+		INSERT INTO Review(r_nickname_m_fk,r_content,r_date,r_rating,r_pnickname_m_fk)
+		VALUES(
+		#{r_nickname_m_fk}
+		,#{r_content}
+		,now()
+		,#{r_rating}
+		,#{r_pnickname_m_fk})
+	</insert>
+	
+	<insert id="AddImg" parameterType="com.project.model.Img">
+		INSERT INTO Img(
+		img_name,img_origname,img_rid_r_fk,img_keyword)
+		VALUES(
+		#{img_name},#{img_origname},#{img_rid_r_fk},#{img_keyword}
+		)
+	</insert>	
+	
+	<delete id="RemoveReview" parameterType="int">
+		DELETE FROM review where r_id = #{r_id}
+	</delete>
+	
+	<delete id="RemoveImg" parameterType="int">
+		DELETE FROM img where img_rid_r_fk = #{img_rid_r_fk}
+	</delete>
+	
+	
+	<select id="ReviewList" parameterType="hashMap" resultMap="ReviewMap">
+		select r_id,r_nickname_m_fk,date_format(r_date, '%Y-%m-%d') AS r_datetxt,r_rating,r_pnickname_m_fk,r_content
+		from review
+		where r_pnickname_m_fk=#{r_pnickname_m_fk}
+		order by r_id desc
+		LIMIT #{limitStart},#{recordSize}
+	</select>
+	
+	
+	<!-- 리뷰 카운트 -->
+	<select id="Review_count" parameterType="String" resultType="int">
+		SELECT
+		IFNULL(COUNT(*),0) FROM review WHERE r_pnickname_m_fk=#{r_pnickname_m_fk}
+	</select>
+	
+	<select id="findnick" parameterType="String" resultType="String">
+		select m_nickname from member where m_email=#{m_email}
+	</select>
+	
+	<select id="ReviewStar" parameterType="String" resultType="double">
+		SELECT IFNULL(SUM(r_rating),0)
+  		FROM review WHERE r_pnickname_m_fk = #{r_pnickname_m_fk};
+	</select>
+	
+	<select id="CheckComments" parameterType="hashMap" resultType="int">
+		select COUNT(*) from ord
+		left join member on o_member_m_fk = m_id 
+		where m_email = #{m_email} and o_product_p_fk = #{p_id}
+	</select>
+	
+</mapper>

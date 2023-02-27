@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<meta charset="UTF-8">
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+<link th:href="@{/css/header.css}" rel="stylesheet" />
+<link th:href="@{/css/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/findPwd.css}" rel="stylesheet" />
+<link th:href="@{/css/reset2.css}" rel="stylesheet" />
+<link th:href="@{/css/reset.css}" rel="stylesheet" />
+<title>비밀번호찾기</title>
+<!-- 창이름 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/header.js}"></script>
+<script type="text/javascript" th:src="@{/js/findPwd.js}"></script>
+</head>
+<body>
+	<header th:replace="header :: header"> </header>
+
+
+	<main>
+		<form class="findPwdForm" id="findPwd_form" th:action="@{/members/info}" th:method="POST">
+			<fieldset>
+				<h1 id="h1">회원정보 확인</h1>
+				<ul>
+					<li>
+						<span class="img">이메일(아이디)</span>
+						<span>
+							<input type="text" class="in" name="m_email" id="m_email" placeholder="두게더에 가입된 계정 이메일">
+						</span>
+					</li>
+
+					<li class="error email_error" id="check_email">이메일 에러 표시</li>
+
+					<li>
+						<span class="img"> 이름 </span>
+						<span>
+							<input type="text" class="in" name="m_name" id="m_name" placeholder="두게더에 가입된 계정 이름">
+						</span>
+					<li class="error name_error">이름 에러 표시</li>
+
+					<div id="codechk">
+						<li>
+							<span class="img">
+								<input type="button" class="button" id="code_send" value="인증번호	받기">
+
+
+
+
+							</span>
+							<span>
+								<input type="text" name="m_code" id="m_code" data-name="인증번호" placeholder="전송받은 인증번호">
+							</span>
+						</li>
+					</div>
+					<li class="error code_error">인증번호 에러</li>
+					<li>
+						<button type="button" class="button" id="code_check" value="인증">인증</button>
+					</li>
+
+				</ul>
+			</fieldset>
+		</form>
+
+		<form class="change_pwd" id="change_pwd" name="findpwd" th:action="@{/members/info}" th:method="PUT">
+
+			<ul>
+				<li>
+					<span>
+						<input type="hidden" id="m_email" class="email" name="m_email" placeholder="email">
+					<h2 id="h2">비밀번호 재설정 		</h2>	
+									</span>
+				</li>
+
+				<li>
+					<span class="img" id="pwd_bg"> 새 비밀번호 </span>
+					<span>
+						<input type="password" name="m_pwd" id="m_pwd" data-name="비밀번호" placeholder="비밀번호">
+					</span>
+					<div class="show-hide">
+						<span class="pwd-show" title="비밀번호 보이기">
+							<i class="bi bi-eye-fill"></i>
+						</span>
+						<span class="pwd-hide" title="비밀번호 가리기">
+							<i class="bi bi-eye-slash"></i>
+						</span>
+					</div>
+
+				</li>
+
+				<li class="error pwd_error">비밀번호 에러</li>
+				<li>
+					<span class="img" id="pwd2_bg"> 비밀번호 확인 </span>
+					<span>
+						<input type="password" name="m_pwd2" id="m_pwd2" data-name="비밀번호확인" placeholder="비밀번호확인">
+					</span>
+					<div class="show-hide2">
+						<span class="pwd-show2" title="비밀번호 보이기">
+							<i class="bi bi-eye-fill"></i>
+						</span>
+						<span class="pwd-hide2" title="비밀번호 가리기">
+							<i class="bi bi-eye-slash"></i>
+						</span>
+					</div>
+				</li>
+				<li class="error pwd2_error">비밀번호일치 에러</li>
+
+			</ul>
+
+
+
+
+
+
+
+			<button type="button" id="findPwd" value="비밀번호 변경하기">비밀번호 변경하기</button>
+		</form>
+	</main>
+	<footer> &copy; DoGaTher Corp. All rights reserved.</footer>
+	</div>
+</body>
+
+</html>

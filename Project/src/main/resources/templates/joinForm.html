@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
+<!-- 회원가입 Form -->
+<head>
+<meta charset="UTF-8">
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+<title>Dogether 회원가입</title>
+
+
+<link th:href="@{/css/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/reset2.css}" rel="stylesheet" />
+<link th:href="@{/css/reset.css}" rel="stylesheet" />
+<link th:href="@{/css/joinForm.css}" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css" />
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/joinForm.js}"></script>
+</head>
+
+<body>
+
+
+	<h1>
+		<a href="/members/index">
+			<img src="/projectimg/KakaoTalk_20230208_164726185.png" alt="두개더로고">
+		</a>
+	</h1>
+	<h3>두게더 회원가입</h3>
+	<main>
+		<form class="joinForm" name="joinForm" id="joinform" th:action="@{/members/users}" th:method="POST">
+			<fieldset>
+				<ul>
+					<li>
+						<!--이미지를 넣기위해 p나 span사용--> <span class="img">
+							<i class="bi bi-envelope"></i>
+						</span> <span>
+							<input type="text" name="m_email" id="m_email" data-name="이메일" placeholder="아이디(이메일)">
+							<input type="button" id="code_send" value="메일인증하기">
+						</span>
+						<button type="button" id="emailCheck" th:value="|중복확인|"></button>
+					</li>
+
+					<li class="error email_error" id="error_email_error">이메일 에러</li>
+					<div id="info_code">
+						<li><span class="img">
+								<i class="bi bi-key"></i>
+							</span> <span>
+								<input type="text" name="m_code" id="m_code" data-name="인증번호" placeholder="전송받은 인증번호">
+							</span> <span id="timer"></span> <input type="button" class="button" id="code_check" value="인증">
+						<li class="error code_error">인증번호 에러</li>
+					</div>
+
+
+					<li><span class="img" id="pwd_bg">
+							<i class="bi bi-bag"></i>
+						</span> <span>
+							<input type="password" name="m_pwd" id="m_pwd" data-name="비밀번호" placeholder="비밀번호">
+						</span>
+						<div class="show-hide">
+							<span class="pwd-show" title="비밀번호 보이기">
+								<i class="bi bi-eye-fill"></i>
+							</span>
+							<span class="pwd-hide" title="비밀번호 가리기">
+								<i class="bi bi-eye-slash"></i>
+							</span>
+						</div></li>
+
+					<li class="error pwd_error">비밀번호 에러</li>
+					<li><span class="img" id="pwd2_bg">
+							<i class="bi bi-bag-check"></i>
+						</span> <span>
+							<input type="password" name="m_pwd2" id="m_pwd2" data-name="비밀번호확인" placeholder="비밀번호확인">
+						</span>
+						<div class="show-hide2">
+							<span class="pwd-show2" title="비밀번호 보이기">
+								<i class="bi bi-eye-fill"></i>
+							</span>
+							<span class="pwd-hide2" title="비밀번호 가리기">
+								<i class="bi bi-eye-slash"></i>
+							</span>
+						</div></li>
+					<li class="error pwd2_error">비밀번호일치 에러</li>
+
+					<li><span class="img">
+							<i class="bi bi-person"></i>
+						</span> <span>
+							<input type="text" name="m_name" id="m_name" data-name="이름" placeholder="이름">
+						</span></li>
+					<li class="error name_error">이름 에러</li>
+
+					<li><label id="radio">
+							<input type="radio" name="m_type" value="ROLE_USER" checked="checked">
+							일반회원
+						</label> <label>
+							<input type="radio" name="m_type" value="ROLE_SELLER">
+							판매자
+						</label></li>
+
+				</ul>
+				<!-- 글자만 눌러도 선택되게 하는 태그 label, for속성은 굳이 안넣어도 됨-->
+
+				<label id="yes">
+					<input type="checkbox" name="join_y" id="join_y">
+					<span id="agree"> 두게더 이용약관, 개인정보 수집 및 이용에 동의합니다</span>
+				</label>
+				<span class="error join_y_error">동의에 체크해주세요</span>
+
+
+				<!-- 
+						a href="#" class="terms">약관보기</a>
+						 -->
+
+
+			</fieldset>
+			<input type="button" id="join_btn" value="회원가입">
+			<a href="/members" class="login_link"> 로그인 </a>
+			<footer>
+				&copy; DoGaTher Corp. All rights reserved.<br>
+			</footer>
+		</form>
+	</main>
+
+</body>
+</html>

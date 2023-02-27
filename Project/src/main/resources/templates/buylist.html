@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link th:href="@{/css/header.css}" rel="stylesheet" />
+<link th:href="@{/css/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/reset2.css}" rel="stylesheet" />
+<link th:href="@{/css/reset.css}" rel="stylesheet" />
+<link th:href="@{/css/buylist.css}" rel="stylesheet" />
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/header.js}"></script>
+<script type="text/javascript" th:src="@{/js/buylist.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+window.onload = () => {
+  findAllPost();
+}
+function findAllPost() {
+  const list =/*[[${ordlist.list}]]*/"";// PagingResponse의 멤버인 List<T> 타입의 list를 의미
+  const img =/*[[${img}]]*/"";// PagingResponse의 멤버인 List<T> 타입의 list를 의미
+  const product =/*[[${product}]]*/"";// PagingResponse의 멤버인 List<T> 타입의 list를 의미
+  if ( !list.length ) { //리스트가 비어있는 경우, "검색 결과가 없다"는 메시지를 행에 출력
+	  $(".mypage_list_cont").html('<td colspan="6"><div className="no_data_msg">검색된 결과가 없습니다.</div></td>');
+    drawPage(); //페이지네이션 HTML을 제거(초기화)한 후 로직을 종료합니다.
+  }
+  const pagination = /*[[${ordlist.pagination}]]*/"";//PagingResponse의 멤버인 pagination을 의미
+  const params =/*[[${params}]]*/""; // @ModelAttribute로 바로 1ㄷ1 맵핑시킨 값을 받아옴																	// ex) 100 - ((1-1)*10) = 100
+  drawList(list,product,img);
+  drawPage(pagination, params);
+  address();
+}
+
+
+
+</script>
+</head>
+<body>
+	<div id="container">
+		<header th:replace="header :: header"> </header>
+		<main id="mypage_main_con">
+					<div class="mypage_bar">
+					<div class="mypage_bar_logo">
+						<span>구매자 페이지</span>
+					</div>
+				
+
+
+					<form class="mypage_search" method="GET">
+						<div class="mypage_text">
+							<span>페이지별 제품 검색</span>
+						</div>
+						<div class="mypage_saerchbox">
+							<input type="search" name="searching" placeholder="검색할 제품 입력">
+
+							<button type="submit">검색</button>
+
+						</div>
+					</form>
+
+					<div class="mypage_list">
+						<div class="mypage_tagbar">
+							<label class="tagbar_menu">
+								<a href="/orders/buylists">
+									<span>구매내역</span>
+								</a>
+							</label>
+							<label class="tagbar_menu">
+								<a href="/orders/delivery">
+									<span>배송 상세 조회</span>
+								</a>
+							</label>
+
+						</div>
+
+						<div class="mypage_list_cont"></div>
+					</div>
+
+					<div class="paging_btn"></div>
+
+			</div>
+
+
+			<div>
+				<form th:action="|/ordersheet/refund/|" onsubmit="return alertRefund()" method="post" id="buyList_Modal">
+					<div id="closeModal">
+						<button class="closeModal">X</button>
+					</div>
+
+					<div>
+						<b style="font-size: 24px;">취소 사유를 선택해주세요</b>
+					</div>
+
+					<div id="refund_modal_content">
+						교환/환불을 선택하시오.
+						<hr>
+						<div>
+							<input id="o_state" type="radio" name="o_state" value="교환 신청">
+							교환 신청
+							<input id="o_state" type="radio" name="o_state" value="환불 신청">
+							환불 신청
+						</div>
+						<hr>
+						취소 사유를 선택하시오. <br>
+						<hr>
+						단순 변심
+						<div>
+							<input id="o_reason" type="radio" name="o_reason" value="상품이 마음에 들지 않음">
+							상품이 마음에 들지 않음
+						</div>
+						<div>
+							<input id="o_reason" type="radio" name="o_reason" value="더 저렴한 상품을 발견함">
+							더 저렴한 상품을 발견함
+						</div>
+
+						<hr>
+						배송 문제
+						<div>
+							<input id="o_reason" type="radio" name="o_reason" value="다른 상품이 배송됨">
+							다른 상품이 배송됨
+						</div>
+						<div>
+							<input id="o_reason" type="radio" name="o_reason" value="배송 예정일 보다 늦게옴">
+							배송 예정일 보다 늦게옴
+						</div>
+
+
+						<hr>
+						상품 문제
+						<div>
+							<input id="o_reason" type="radio" name="o_reason" value="상품의 구성품/부속품이 들어있지 않음">
+							상품의 구성품/부속품이 들어있지 않음
+						</div>
+						<div>
+							<input id="o_reason" type="radio" name="o_reason" value="상품이 설명과 다름">
+							상품이 설명과 다름
+						</div>
+						<div>
+							<input id="o_reason" type="radio" name="o_reason" value="상품이 파손되어 배송됨">
+							품이 파손되어 배송됨
+						</div>
+						<div>
+							<input id="o_reason" type="radio" name="o_reason" value="상품 결함/기능에 이상이 있음">
+							상품 결함/기능에 이상이 있음
+						</div>
+
+
+						<hr>
+						주문 문제
+						<div>
+							<input id="o_reason" type="radio" name="o_reason" value="다른 상품 추가 후 재주문 예정">
+							다른 상품 추가 후 재주문 예정
+						</div>
+						<div>
+							<input id="o_reason" type="radio" name="o_reason" value="상품의 옵션 선택을 잘못함">
+							상품의 옵션 선택을 잘못함
+						</div>
+
+						<hr>
+						기타
+						<div>
+							<input id="o_reason" type="radio" name="o_reason" value="기타">
+							기타
+						</div>
+
+						<hr>
+						<!-- 					<input type="hidden" value="" name="o_id" id = "set_o_id"> -->
+						<button type="submit" id="refundSubmit">교환/환불 하기</button>
+					</div>
+				</form>
+			</div>
+		</main>
+
+
+		<footer th:replace="footer ::footer"></footer>
+
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link th:href="@{/css/header.css}" rel="stylesheet" />
+<link th:href="@{/css/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/qnaboard.css}" rel="stylesheet" />
+<link th:href="@{/css/reset2.css}" rel="stylesheet" />
+<link th:href="@{/css/qnaBoard.css}" rel="stylesheet" />
+<link th:href="@{/css/reset.css}" rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/header.js}"></script>
+
+</head>
+<body>
+	<header th:replace="header :: header"> </header>
+	<main class="main">
+		<div id="container">
+			<div id="questionRead_area">
+				<form enctype="multipart/form-data" method="get">
+					
+					<div id="top">
+						<div id="qna_id" class="qna_show">
+							<span th:text="|주문 번호 : ${questionMap['qnaModel'].getQ_id}|"></span>
+						</div>
+
+						<div id="qna_product" class="qna_show">
+							<span th:text="|상품 id : ${questionMap['qnaModel'].getQ_id_p_fk}|"></span>
+						</div>
+
+						<div id="qna_date" class="qna_show">
+							<span th:text="|작성날짜 : ${questionMap['qnaModel'].getQ_date}|"></span>
+						</div>
+
+						<div id="qna_title" class="qna_show">
+							<span th:text="|제목 : ${questionMap['qnaModel'].getQ_title}|"></span>
+						</div>
+					</div>
+
+					<div id="bottom">
+						<div id="qna_content" class="qna_show">
+							<span th:text="|내용 : ${questionMap['qnaModel'].getQ_content}|"></span>
+						</div>
+
+						<!-- 				<div th:if="${questionMap['qnaModel'].getQ_answer}==null"> -->
+						<!-- 					<span th:text="|답변이 아직 없습니다.|"></span> -->
+						<!-- 				</div> -->
+
+						<div th:if="${questionMap['qnaModel'].getQ_answer}!=null"
+							class="qna_show" id="qna_answer">
+							<span th:text="|답변 : ${questionMap['qnaModel'].getQ_answer}|"></span>
+						</div>
+
+						<!-- 				사용자 권한이 ROLE_SELLER라면 이 화면이 보이도록 -->
+						<!-- 				상품이 본인이 올린 것인지도 알아야함 -> 추후에 추가 -->
+						<div th:if="${#authentication.authorities}==ROLE_SELLER">
+							<a href="answer.html"></a>
+						</div>
+						<div th:if="${#authentication.authorities}==ROLE_SELLER">
+							<button id="questionDelete">삭제</button>
+						</div>
+					</div>
+
+					<a href="answer.html">답변 수정하기</a>
+
+				</form>
+
+			</div>
+		</div>
+	</main>
+	<footer th:replace="footer ::footer"></footer>
+
+</body>
+</html>

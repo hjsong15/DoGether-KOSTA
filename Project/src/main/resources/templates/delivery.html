@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link th:href="@{/css/header.css}" rel="stylesheet" />
+<link th:href="@{/css/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/reset2.css}" rel="stylesheet" />
+<link th:href="@{/css/reset.css}" rel="stylesheet" />
+<link th:href="@{/css/delivery.css}" rel="stylesheet" />
+
+
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap"
+	rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/header.js}"></script>
+</head>
+
+<body>
+
+	<div class="container">
+		<header th:replace="header :: header"> </header>
+		
+		<div class="main_box">
+		<span>배송 조회 </span>
+		
+		
+		<form action="http://info.sweettracker.co.kr/tracking/5" method="post">
+			<div class="form-group">
+			
+			<!---------------------------- **APIKEY**  --------------------->
+			<label for="t_key"></label>
+			 <input type="hidden" class="form-control" id="t_key" name="t_key"
+					value="iH5hwc1qRUyfHb3NTdchiw" readonly="readonly">
+			</div>
+			
+			<div class="form-group">
+				<label for="t_code">택배사 코드</label> 
+				<select class="form-control" name="t_code" id="t_code" placeholder="05">
+				<option value="05">한진</option>
+				<option value="04">CJ대한통운</option>
+				<option value="08">롯데</option>
+				<option value="01">우체국</option>
+				<option value="06">로젠</option>
+				<option value="46">CU 편의점</option>
+				<option value="11">일양로지스</option>
+				</select>
+			</div>
+			
+			<div class="form-group">
+				<label for="t_invoice">운송장 번호</label> <input type="text"
+					class="form-control" name="t_invoice" id="t_invoice"
+					placeholder="운송장 번호를 입력하세요">
+			<button type="submit" class="btn btn-default" >조회하기</button>
+			</div>
+		</form>
+		</div>
+		 이 외의 택배사는 <a href="http://info.sweettracker.co.kr/apidoc/"><span class="durl">여기</span>  를 클릭하여 확인후 택배사코드를 입력해주세요</a>
+	</div>
+
+	<footer th:replace="footer ::footer"></footer>
+
+		
+</body>
+</html>

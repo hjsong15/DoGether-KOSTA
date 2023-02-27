@@ -1,0 +1,188 @@
+#container {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	position: relative;
+}
+#productoption_main_con {
+	width: 100%;
+	padding-top: 170px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.type_btn_box {
+	width: 800px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	flex-direction: column;
+}
+
+.type_btn_box button {
+	
+	width: 200px;
+	height: 40px;
+	margin:20px;
+	border-radius: 10px;
+	background-color: #4285F4;
+	color:white;
+	font-size: 20px;
+	font-weight: bold;
+		
+}
+
+.type_btn_box button:hover {
+	background-color: #4285F4;
+	color: white;
+}
+
+.form_text {
+	font-size: 24px;
+	font-weight: bold;
+	width: 800px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.option_form_1 {
+	width: 900px;
+	height: 300px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	border-radius: 20px;
+}
+.opt_null {
+	display: none;
+}
+.productoption_box {
+	width: 1200px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+	margin:100px;
+	border:1px solid #e2e2e2;
+	padding:50px;	
+	border-radius: 10px;
+}
+
+.option_form {
+	border-radius:10px;
+	width: 900px;
+	height: 300px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.opt_box {
+	width: 800px;
+	height: 200px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.opt_tag {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	width: 200px;
+	height: 300px;
+}
+
+.opt_tag span button {
+	margin-left: 5px;
+	width: 25px;
+	height: 20px;
+	border: 1px solid #e2e2e2;
+	border-radius: 5px;
+	background-color: #4285F4;
+	color: white;
+}
+
+.opt_tag input {
+	margin: 2px;
+	border: 2px solid #e2e2e2;
+	border-radius: 3px;
+	width: 150px;
+	height: 20px;
+}
+
+.optadd_btn {
+	width: 800px;
+	height: 50px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+#Addoption_btn {
+	margin-right: 20px;
+	width: 150px;
+	height: 30px;
+	border: 3px solid #e2e2e2;
+	font-size: 16px;
+	font-weight: bold;
+	width: 150px;
+}
+.SaveBtn{
+		margin-right: 20px;
+	width: 150px;
+	height: 30px;
+	border: 3px solid #e2e2e2;
+	font-size: 16px;
+	font-weight: bold;
+	width: 150px;
+}
+.Addoption_one {
+	margin-right: 20px;
+	width: 150px;
+	height: 30px;
+	border: 3px solid #e2e2e2;
+	font-size: 16px;
+	font-weight: bold;
+	width: 150px;
+}
+
+
+.file_form {
+	width: 800px;
+	height: 200px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.opt_file {
+	width: 800px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#file_btn {
+	width: 800px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#file_btn button {
+	width: 150px;
+	height: 30px;
+	font-size: 18px;
+	font-weight: bold;
+	border: 3px solid #e2e2e2;
+}

@@ -1,0 +1,146 @@
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GangwonEduPowerExtraBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+#container{
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position:relative;
+}
+
+#productlist{
+    width:90%;
+    padding-top:50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;   
+    margin-top: 100px;
+   
+}
+.product_order_list{
+	width:1200px;
+	display:flex;
+    height: 100px;  
+    padding-left: 30px;
+    display:flex;
+    justify-content: flex-end;
+    
+}
+
+.product_order_list ul{
+  	float: right;
+  	display: flex;
+  	align-items: center;
+  	font-family: 'LINESeedKR-Bd';
+}
+
+.product_order_list li{
+	list-style-type: none;
+ 	float: left;
+ 	margin-right: 30px;
+ 	cursor:pointer;
+}
+.product_list {
+    width: 1200px;
+    display: flex;
+    justify-content: flex-start;
+    align-content: space-between;
+    flex-wrap: wrap;
+    height: 1000px;
+    margin-top: 50px;
+}
+.list_box{
+	width: 200px;
+	border: 1px solid #e2e2e2;
+	margin: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 10px;
+	background-color:#FFFAFA;
+}
+
+.list_box:hover{ /* a태그에 마우스를 올렸을 때 */
+  transform: scale(1.2);
+}
+
+.list_box a {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	width: 200px;
+}
+
+.list_box_url{
+	width: 200px;
+	height: 350px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	
+}
+
+.list_box_url span {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 50px;
+}
+
+.list_box img{
+	width: 100%;
+	height: 200px;
+	border-radius: 10px;
+}
+
+.list_box_name{
+	width: 450px;
+	height: 100px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.list_box_name span{
+	margin-left: 15px;
+}
+
+.paging_btn {
+	width: 100%;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.product_remaining{
+
+	font-family: 'LINESeedKR-Bd';
+}
+.list_category{
+	display: flex;
+	justify-content: flex-start;
+	align-items:center;
+	width: 1200px;
+	height: 100px;
+	font-family: 'GangwonEduPowerExtraBoldA';
+	font-size: 40px;
+	margin-left: 30px;
+}
+.main_contents{
+	border : 1px solid #dae1e6;
+	background-color:#FFFFFF;
+}

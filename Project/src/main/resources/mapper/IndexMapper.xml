@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.IndexMapper">
+
+	<resultMap type="com.project.model.Product" id="ProductMap">
+		<id property="p_id" column="p_id" /> <!-- id에는 프라이머리키 -->
+		<result property="p_name" column="p_name" />
+		<result property="p_price" column="p_price" />
+		<result property="p_category" column="p_category" />
+		<result property="p_duedate" column="p_duedate" />
+		<result property="p_recruitdate" column="p_recruitdate" />
+		<result property="p_createdate" column="p_createdate" />
+		<result property="p_nickname_m_fk" column="p_nickname_m_fk" />
+		<result property="p_chk" column="p_chk" />	
+		<result property="p_sell" column="p_sell" />
+		<collection property="img" column="p_id" javaType="java.util.ArrayList" ofType="com.project.model.Img" select="getImg" />
+		<collection property="discount" column="p_id" javaType="java.util.ArrayList" ofType="com.project.model.discount" select="getDiscount" />
+	</resultMap>
+	
+	<resultMap type="com.project.model.Img" id="ImgMap">
+		<result property="img_name" column="img_name" />
+	</resultMap>
+	
+	<resultMap type="com.project.model.Discount" id="DiscountMap">
+		<id property="dis_id" column="dis_id" />
+		<result property="dis_count" column="dis_count" />
+		<result property="dis_pid_p_fk" column="dis_pid_p_fk" />
+		<result property="dis_quantity" column="dis_quantity" />
+	</resultMap>
+	
+	<!-- img join -->
+	<select id="getImg" resultMap="ImgMap" parameterType="int">
+		SELECT * FROM img WHERE img_pid_p_fk=#{p_id}
+		and img_keyword='p_img'
+		ORDER BY img_id LIMIT 0,1
+	</select>
+	
+	<select id="getDiscount" resultMap="DiscountMap" parameterType="int">
+		SELECT dis_count,dis_quantity FROM discount WHERE dis_pid_p_fk=#{p_id} ORDER BY
+		dis_id
+	</select>
+	
+	<!-- 인기상품 불러오기 -->
+	<select id="Productbest" resultMap="ProductMap">
+		SELECT * FROM product where p_chk = 'start'
+        order by p_sell
+		DESC LIMIT 0,6
+	</select>
+	<!-- 신상품 불러오기 -->
+	<select id="Productnew" resultMap="ProductMap">
+		SELECT * FROM product where p_chk = 'start'
+        order by p_recruitdate 
+		DESC LIMIT 0,6
+	</select>
+	
+	<!-- 전체 게시글 불러오기 -->
+	<select id="PagingList" parameterType="com.project.model.SearchDto" resultMap="ProductMap">
+        SELECT * FROM product where p_chk = 'start'
+        LIMIT #{pagination.limitStart},#{recordSize}
+    </select>
+    
+    <!-- 최신순 정렬 -->
+    <select id="newlist" parameterType="com.project.model.SearchDto" resultMap="ProductMap">
+        SELECT * FROM product where p_chk = 'start'
+        order by p_recruitdate desc
+        LIMIT #{pagination.limitStart},#{recordSize}
+    </select>
+    
+    <!-- 낮은가격순 정렬 -->
+    <select id="pricelist" parameterType="com.project.model.SearchDto" resultMap="ProductMap">
+        SELECT * FROM product where p_chk = 'start'
+        order by p_price
+        LIMIT #{pagination.limitStart},#{recordSize}
+    </select>
+    
+    <!-- 높은가격순 정렬 -->
+    <select id="pricelistdesc" parameterType="com.project.model.SearchDto" resultMap="ProductMap">
+        SELECT * FROM product where p_chk = 'start'
+        order by p_price desc
+        LIMIT #{pagination.limitStart},#{recordSize}
+    </select>
+    
+    <!-- 판매량순 정렬 -->
+    <select id="bestlist" parameterType="com.project.model.SearchDto" resultMap="ProductMap">
+        SELECT * FROM product where p_chk = 'start'
+        order by p_sell
+        LIMIT #{pagination.limitStart},#{recordSize}
+    </select>
+    
+    <!-- 게시글 수 카운팅 -->
+    <select id="count"  resultType="int">
+        SELECT COUNT(*) FROM product where p_chk = 'start'
+            
+    </select>
+    
+    <!-- 카테고리로 불러오기 -->
+    <select id="Category" parameterType="hashMap" resultMap="ProductMap">
+		SELECT * FROM product WHERE p_category=#{p_category} and p_chk = 'start'
+		LIMIT #{limitStart},#{recordSize}
+	</select>
+	
+	 <!-- 카테고리 최신순 정렬 -->
+    <select id="CategoryNew" parameterType="hashMap" resultMap="ProductMap">
+		SELECT * FROM product WHERE p_category=#{p_category} and p_chk = 'start'
+		order by p_recruitdate
+		LIMIT #{limitStart},#{recordSize}
+	</select>
+	
+	<!-- 카테고리 낮은가격순 정렬 -->
+    <select id="CategoryPrice" parameterType="hashMap" resultMap="ProductMap">
+		SELECT * FROM product WHERE p_category=#{p_category} and p_chk = 'start'
+		order by p_price
+		LIMIT #{limitStart},#{recordSize}
+	</select>
+	
+	
+	<!-- 카테고리 높은가격순 정렬 -->
+    <select id="CategoryPriceDesc" parameterType="hashMap" resultMap="ProductMap">
+		SELECT * FROM product WHERE p_category=#{p_category} and p_chk = 'start'
+		order by p_price desc
+		LIMIT #{limitStart},#{recordSize}
+	</select>
+	
+	<!-- 카테고리 판매량순 정렬 -->
+    <select id="CategoryBest" parameterType="hashMap" resultMap="ProductMap">
+		SELECT * FROM product WHERE p_category=#{p_category} and p_chk = 'start'
+		order by p_chk
+		LIMIT #{limitStart},#{recordSize}
+	</select>
+	
+	<!-- 카테고리별 게시글 카운팅 -->
+	<select id="category_count" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM product WHERE p_category=#{p_category} and p_chk = 'start'
+	</select>
+    
+
+	<!-- 카테고리 검색 카운팅 -->
+	<select id="SearchCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM product 
+		WHERE p_category = #{keyword} and p_chk = 'start' and p_name like 
+		CONCAT('%',#{search},'%')
+	</select>
+	
+	<!-- 카테고리 전체 카운팅 -->
+	<select id="SearchTotCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM product 
+		WHERE p_chk = 'start' and p_name
+		LIKE CONCAT('%',#{search},'%')
+	</select>
+	
+	<!-- 카테고리 검색 -->
+	<select id="Search" parameterType="hashMap"
+		resultMap="ProductMap">
+		SELECT * FROM product 
+		WHERE p_category = #{keyword} and p_chk = 'start' and  p_name like
+		CONCAT('%',#{search},'%') LIMIT #{limitStart},#{recordSize}
+	</select>
+	
+	<!-- 전체 검색 -->
+	<select id="SearchTotal" parameterType="hashMap"
+		resultMap="ProductMap">
+		SELECT * FROM product 
+		WHERE p_chk = 'start' and p_name like
+		CONCAT('%',#{search},'%') 
+		LIMIT #{limitStart},#{recordSize}
+	</select>
+
+	
+</mapper>

@@ -1,0 +1,349 @@
+@font-face {
+	font-family: 'OTWelcomeRA';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
+#container {
+	width: 100%;
+	height: 80%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
+	margin-top: 100px;
+	flex-wrap: wrap;
+	
+}
+
+#mypage_main_con {
+	font-family: 'OTWelcomeRA';
+	width: 100%;
+	padding:50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+
+.mypage_box {
+	width: 1000px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.mypage_bar {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.mypage_bar_logo {
+	margin-left:350px;
+	padding: 15px 50px 10px;
+	background-color: #4285F4;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 22px;
+	font-weight: bold;
+	color: white;
+	border-right: 1px solid #e2e2e2;
+}
+
+.mypage_bar_list {
+	width: 150px;
+	height: 400px;
+	background-color: #F6F6F6;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.bar_list1 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100px;
+	height: 200px;
+	flex-direction: column;
+	border-bottom: 1px solid #e2e2e2;
+}
+
+.bar_list1:last-child {
+	border-bottom: 0px;
+}
+
+.bar_list1 li span {
+	font-size: 20px;
+	font-weight: bold;
+	
+}
+
+.bar_list1 li a {
+	margin: 5px;
+}
+
+/*=========================mypage 좌측 작은 메뉴완료===========================*/
+.mypage_text_box {
+	width: 850px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex-direction: column;
+}
+
+.mypage_status_bar {
+	width: 850px;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #4285F4;
+	font-size: 16px;
+}
+
+.status_bar {
+	width: 200px;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	color: white;
+	border-right: 2px solid #e2e2e2;
+}
+
+.status_bar_2 {
+	width: 450px;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.status_bar_2_text1, .status_bar_2_text2 {
+	width: 450px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.status_bar_2_text1 span, .status_bar_2_text2 span {
+	margin-left: 20px;
+}
+
+.status_bar_2_text1 {
+	border-bottom: 1px solid #e2e2e2;
+}
+/*=================상단 메뉴바===================*/
+.mypage_search {
+	width: 850px;
+	height: 150px;
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	font-size: 20px;
+	flex-direction: column;
+}
+
+.mypage_text {
+	margin-left: 350px;
+	width: 820px;
+	height: 50px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-end;
+}
+
+.mypage_saerchbox {
+	width: 820px;
+	height: 100px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-end;
+}
+
+.mypage_saerchbox input {
+	width: 150px;
+	height: 25px;
+	padding-left: 5px;
+	margin-bottom: 50px;
+}
+
+.mypage_search button {
+	width: 50px;
+	margin-bottom: 50px;
+	height: 25px;
+	margin-left: 10px;
+	border: 1px solid #e2e2e2;
+}
+/*=======================검색창==========================*/
+.mypage_list {
+	width: 850px;
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-start;
+	flex-direction: column;
+} /* 리스트 길이 1250px */
+.mypage_tagbar {
+	width: 820px;
+	height: 50px;
+	display: flex;
+	justify-content:flex-start;
+	align-items: center;
+} /* 리스트 버튼 50px */
+.tagbar_menu {
+	width: 205px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #e2e2e2;
+}
+
+.tagbar_menu a {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+/*============================배송,예정,판매중박스====================================*/
+.mypage_list_cont {
+	margin-top: 50px;
+	width: 820px;
+	border: 1px solid #e2e2e2;
+	border-radius: 15px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: flex-start;
+	padding-bottom: 20px;
+}
+
+.mypage_list_tag {
+	width: 750px;
+	height: 150px;
+	border: 1px solid #e2e2e2;
+	margin-top: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 10px;
+}
+
+.mypage_list_tag_img {
+	width: 200px;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0px 0px 5px black;
+}
+
+.mypage_list_tag_img a {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.mypage_list_tag_img img {
+	width: 100%;
+	height: 100%;
+}
+
+.myapge_list_tag_text {
+	width: 350px;
+	height: 100px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.myapge_list_tag_text span {
+	margin-left: 15px;
+}
+
+.myapge_text {
+	width: 300px;
+	height: 100%;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.mypage_info {
+	width: 100px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.mypage_info a {
+	width: 70px;
+	height: 50px;
+	border: 1px solid #e2e2e2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.paging_btn {
+	margin-top: 30px;
+	display: flex;
+	width: 750px;
+	height: 50px;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+}
+
+#buyList_Modal {
+	border: 1px solid #e2e2e2;
+	z-index: 99;
+	width: 500px;
+	height: 800px;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	background-color: grey;
+	flex-direction: column;
+	flex-grow:100%;
+	transform: translate(-50%, -50%);
+}
+#closeModal{
+	display: flex;
+	width: 500px;
+	justify-content: flex-end;
+}
+
+.closeModal{
+/* 	border: 1px solid black; */
+	display:flex;
+	width: 100px;
+	height: 50px;
+	font-size: 24px;
+	
+}
+
+.request_Box{
+	border:1px solid gray;
+	flex-direction: column;
+	width: 70px;
+}

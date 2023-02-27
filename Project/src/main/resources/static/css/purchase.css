@@ -1,0 +1,113 @@
+.container {
+	width: 100%;
+	height: 900px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+#write_area{
+	width:100%;
+	height:1400px;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.form_content{
+	font-size: 1rem;
+	padding: 15px;
+	border-radius: 10px;
+	display: flex;
+	justify-content: flex-end;
+	flex-direction: column;
+	top: 30%;
+	left: 50%;
+	width:800px;
+	height: 500px;
+	border: solid #5B6DCD 3px;
+}
+
+.wrapper {
+	display: flex;
+	justify-content: flex-end;
+	flex-direction: column;
+	width:100%;
+	max-width: 300px;
+	
+}
+
+.title{
+	margin:10px;
+	display: flex;
+	text-align: left;
+	box-sizing: content-box;
+	width: 745px;
+	border: solid #5B6DCD 1px;
+	padding: 3px;	
+	justify-items:flex-start;
+	justify-content: space-between;
+}
+
+.content_order{
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: flex-end;
+	text-align: center;
+/* 	border-bottom: dashed #4285F4; */
+	box-sizing: content-box;
+	width: 30px;
+	border: solid #5B6DCD 3px;
+	padding: 3px;	
+}
+
+#option2{
+	height:33px;
+}
+.main{
+	display : felx;
+
+/* 	align-items: center; */
+	
+}
+.title span{
+	width:100px;
+}
+
+#smallButton{
+	display: flex;
+	justify-content: flex-end;
+	background-color: #5B6DCD;
+	border-radius: 5px;
+	width:30px;
+	padding: 10px 10px;
+}
+#buttonSort{
+	display: flex;
+	flex-direction: row;
+	justify-items: flex-end;
+	padding: 0px 0px 0px 630px;
+/* 	width:200px; */
+}
+#smallButton button{
+	text-align: center;
+}
+#widthUp{
+	width:800px;
+}
+
+/* .order_content{ */
+/* 	display:flex; */
+/* 	align-items:center; */
+/* 	justify-content:center; */
+/* 	flex-direction:column; */
+/* 	min-height: 50px; */
+/* 	overflow: auto; */
+/* 	padding: 50px; */
+/* 	border: 20px #4285F4; */
+/* 	margin: 50px; */
+/* 	width: 100%; */
+/* 	height: 2200px; */
+/* } */

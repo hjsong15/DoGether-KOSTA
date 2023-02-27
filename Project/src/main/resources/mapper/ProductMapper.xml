@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.ProductMapper">
+
+	<select id="FindCalender" parameterType="int" resultMap="ProductCalender">
+		SELECT p_duedate,p_recruitdate FROM product WHERE p_id=#{p_id}
+	</select>
+
+
+	<resultMap type="com.project.model.Product" id="ProductMap">
+		<id property="p_id" column="p_id" />
+		<result property="p_name" column="p_name" />
+		<result property="p_price" column="p_price" />
+		<result property="p_category" column="p_category" />
+		<result property="p_duedate" column="p_duedate" />
+		<result property="p_recruitdate" column="p_recruitdate" />
+		<result property="p_createdate" column="p_createdate" />
+		<result property="p_nickname_m_fk" column="p_nickname_m_fk" />
+		<result property="p_chk" column="p_chk" />
+		<result property="p_sell" column="p_sell" />
+		<collection property="img" column="p_id" javaType="java.util.ArrayList" ofType="com.project.model.Img" select="getImg" />
+		<collection property="option" column="p_id" javaType="java.util.ArrayList" ofType="com.project.model.Option" select="getOpt" />
+		<collection property="discount" column="p_id" javaType="java.util.ArrayList" ofType="com.project.model.discount" select="getDiscount" />
+	</resultMap>
+	<resultMap type="com.project.model.Product" id="ProductCalender">
+		<result property="p_duedate" column="p_duedate" />
+		<result property="p_recruitdate" column="p_recruitdate" />
+	</resultMap>
+	<resultMap type="com.project.model.Product" id="ProductList">
+		<id property="p_id" column="p_id" />
+		<result property="p_name" column="p_name" />
+		<result property="p_endprice" column="p_endprice" />
+		<result property="p_price" column="p_price" />
+		<result property="p_duedate" column="p_duedate" />
+		<result property="p_recruitdate" column="p_recruitdate" />
+		<result property="p_nickname_m_fk" column="p_nickname_m_fk" />
+		<result property="p_category" column="p_category" />
+		<result property="p_chk" column="p_chk" />
+		<result property="p_sell" column="p_sell" />
+		<collection property="img" column="p_id" javaType="java.util.ArrayList" ofType="com.project.model.Img" select="getImg_name" />
+	</resultMap>
+
+	<resultMap type="com.project.model.Order" id="OrderMap">
+		<id property="o_id" column="o_id" />
+		<result property="o_quantity" column="o_quantity" />
+		<result property="o_dstate" column="o_dstate" />
+		<result property="o_option1" column="o_option1" />
+		<result property="o_option2" column="o_option2" />
+		<result property="o_date_md" column="o_date" />
+		<result property="o_postCode" column="o_postCode" />
+		<result property="m_email" column="m_email" jdbcType="VARCHAR" javaType="String" />
+		<result property="p_name" column="p_name" jdbcType="VARCHAR" javaType="String" />
+		<result property="p_endprice" column="p_endprice" jdbcType="INTEGER" javaType="int" />
+	</resultMap>
+	<resultMap type="com.project.model.Img" id="ImgMap">
+		<id property="img_id" column="img_id" />
+		<result property="img_name" column="img_name" />
+		<result property="img_origname" column="img_origname" />
+		<result property="img_pid_p_fk" column="img_pid_p_fk" />
+		<result property="img_keyword" column="img_keyword" />
+	</resultMap>
+	<resultMap type="com.project.model.Option" id="OptionMap">
+		<id property="opt_id" column="opt_id" />
+		<result property="opt_pid_p_fk" column="opt_pid_p_fk" />
+		<result property="opt_option1" column="opt_option1" />
+		<result property="opt_option2" column="opt_option2" />
+		<result property="opt_quantity" column="opt_quantity" />
+	</resultMap>
+	<resultMap type="com.project.model.Discount" id="DiscountMap">
+		<id property="dis_id" column="dis_id" />
+		<result property="dis_count" column="dis_count" />
+		<result property="dis_pid_p_fk" column="dis_pid_p_fk" />
+		<result property="dis_quantity" column="dis_quantity" />
+	</resultMap>
+
+	<!-- ================================== detail JOIN RESULT======================================== -->
+	<select id="FindProduct" parameterType="int" resultMap="ProductMap">
+		SELECT * FROM product WHERE p_id=#{p_id}
+	</select>
+
+	<select id="getImg" resultMap="ImgMap" parameterType="int">
+		SELECT * FROM img WHERE img_pid_p_fk=#{p_id} ORDER BY img_id
+	</select>
+	<select id="getOpt" resultMap="OptionMap" parameterType="int">
+		SELECT opt_option1 FROM opt WHERE opt_pid_p_fk=#{p_id} GROUP BY opt_option1 ORDER BY
+		opt_id
+	</select>
+	<select id="getDiscount" resultMap="DiscountMap" parameterType="int">
+		SELECT dis_count,dis_quantity FROM discount WHERE dis_pid_p_fk=#{p_id} ORDER BY
+		dis_id
+	</select>
+
+	<select id="CategoryBestProduct" resultType="hashMap" parameterType="String">
+		SELECT p.p_name,p.p_price,p.p_sell,a.img_name,p.p_id FROM product AS p
+		left join
+		( SELECT i.img_name,i.img_pid_p_fk,p.p_id FROM img AS i LEFT JOIN Product AS p on
+		i.img_pid_p_fk=p.p_id WHERE i.img_pid_p_fk=p.p_id AND
+		img_keyword='p_img'
+		GROUP BY p.p_id)AS a on p.p_id=a.img_pid_p_fk WHERE
+		p.p_category=#{p_category} group by
+		p.p_name,p.p_price,p.p_sell,a.img_name,p.p_id order by p_sell
+		desc LIMIT 0,9 ;
+	</select>
+
+	<select id="SellerBestProduct" resultType="HashMap" parameterType="String">
+		SELECT p.p_name,p.p_price,p.p_sell,a.img_name,p.p_id FROM product AS p
+		left
+		join
+		( SELECT i.img_name,i.img_pid_p_fk FROM img AS i LEFT JOIN Product AS p on i.img_pid_p_fk=p.p_id WHERE i.img_pid_p_fk=p.p_id AND
+		img_keyword='p_img'
+		GROUP BY p.p_id)AS a on
+		p.p_id=a.img_pid_p_fk WHERE
+		p_nickname_m_fk=#{p_nickname_m_fk} group by
+		p.p_name,p.p_price,p.p_sell,a.img_name,p.p_id order by p_sell
+		desc LIMIT 0,9;
+	</select>
+
+	<!-- ================================== detail JOIN RESULT======================================== -->
+
+
+
+	<!-- ================================== 판매자 list JOIN RESULT======================================== -->
+	<select id="WriterProductlistCount" resultType="int" parameterType="String">
+		SELECT count(*) FROM product WHERE p_nickname_m_fk=#{p_nickname_m_fk}
+		<if test="keyword=='all'">
+			AND p_chk!='remove'
+		</if>
+		<if test="keyword != 'all'">
+			AND p_chk=#{keyword}
+		</if>
+	</select>
+	<select id="WriterProductlist" parameterType="hashMap" resultMap="ProductList">
+		SELECT
+		p_id,p_name,p_category,p_price,p_endprice,p_duedate,p_recruitdate,p_nickname_m_fk,case when p_chk = 'failed' then "판매량 미달" when p_chk =
+		'start' then
+		"판매중" when
+		p_chk = 'add' then "공고시작전" when p_chk ='endprice' then "정산완료" end AS p_chk,p_sell
+		FROM Product WHERE
+		p_nickname_m_fk=#{p_nickname_m_fk}
+		<if test="keyword=='all'">
+			AND p_chk!='remove'
+		</if>
+		<if test="keyword != 'all'">
+			AND p_chk=#{keyword}
+		</if>
+		LIMIT #{limitstart},#{recordsize}
+	</select>
+	<select id="getImg_name" parameterType="int" resultMap="ImgMap">
+		SELECT img_name FROM Img WHERE img_pid_p_fk=#{p_id} AND img_keyword='p_img' LIMIT 0,1
+	</select>
+
+	<!-- ================================== 판매자 list JOIN RESULT======================================== -->
+
+	<!-- ===================================SELECT 부분======================================== -->
+
+
+
+	<select id="SearchSeller" parameterType="hashMap" resultMap="ProductList">
+		SELECT p_id,p_name,p_category,p_price,p_endprice,p_duedate,p_recruitdate,p_nickname_m_fk,case when p_chk = 'failed' then "판매량 미달" when p_chk =
+		'start' then
+		"판매중" when p_chk = 'add' then "공고시작전" when p_chk ='endprice' then "정산완료" end AS p_chk,p_sell
+		FROM Product WHERE
+		p_nickname_m_fk=#{p_nickname_m_fk} AND
+		<if test="keyword=='all'">
+			p_chk!='remove' AND
+		</if>
+		<if test="keyword!='all'">
+			p_chk=#{keyword} AND
+		</if>
+		p_name LIKE
+		CONCAT('%',#{search},'%') LIMIT #{limitstart},#{recordsize}
+	</select>
+
+	<select id="SearchSellerCount" parameterType="String" resultType="int">
+
+		SELECT count(*) FROM product WHERE p_nickname_m_fk=#{p_nickname_m_fk} AND
+		<if test="keyword=='all'">
+			p_chk!='remove' AND
+		</if>
+		<if test="keyword!='all'">
+			p_chk=#{keyword} AND
+		</if>
+		p_name LIKE
+		CONCAT('%',#{search},'%')
+	</select>
+
+
+	<select id="BuyProduct" parameterType="hashMap" resultMap="OrderMap">
+		SELECT m.m_email,o.o_id,o.o_dstate,o.o_postCode,
+		o.o_option1,o.o_option2,DATE_FORMAT(o.o_date, '%m월%d일 %H시%i분') AS o_date, p.p_endprice , p.p_name
+		,o.o_quantity FROM ord AS o LEFT JOIN product AS p
+		ON p.p_id=o_product_p_fk
+		LEFT JOIN member AS m ON m.m_id=o.o_member_m_fk WHERE p.p_chk='endprice'
+		AND p.p_nickname_m_fk=#{p_nickname_m_fk}
+		<choose>
+			<when test="keyword=='no'">
+				AND o.o_postCode is null
+			</when>
+		</choose>
+		<if test="sort!=null">
+		ORDER BY o_date ${sort}
+		</if>
+		LIMIT
+		#{limitstart},#{recordsize}
+
+
+	</select>
+	<select id="BuyProductCount" parameterType="String" resultType="int">
+		SELECT count(*) FROM ord AS o LEFT JOIN product AS p ON p.p_id=o_product_p_fk
+		LEFT JOIN member AS m ON m.m_id=o.o_member_m_fk WHERE
+		p.p_chk='endprice' AND p.p_nickname_m_fk=#{p_nickname_m_fk}
+		<choose>
+			<when test="keyword=='no'">
+				AND o.o_postCode is null
+			</when>
+		</choose>
+	</select>
+
+
+
+	<select id="img_length" parameterType="com.project.model.Img" resultMap="ImgMap">
+		SELECT img_name,img_origname,img_id FROM img WHERE
+		img_pid_p_fk=#{img_pid_p_fk} AND img_keyword=#{img_keyword} ORDER BY img_id
+	</select>
+	<select id="Update_find" parameterType="int" resultMap="DiscountMap">
+		SELECT dis_id FROM discount WHERE dis_pid_p_fk=#{p_id}
+	</select>
+
+	<select id="Option_List" resultMap="OptionMap" parameterType="int">
+		SELECT * FROM opt WHERE opt_pid_p_fk=#{p_id}
+	</select>
+
+	<select id="Sell_chart" parameterType="String" resultType="hashMap">
+		SELECT p_endprice,p_sell,p_id FROM product WHERE p_nickname_m_fk=#{p_nickname_m_fk}
+		AND p_chk='endprice' group by p_endprice,p_sell,p_id;
+	</select>
+	
+
+	<!-- ===================================SELECT 부분======================================== -->
+	<!-- ===================================ADD 부분======================================== -->
+	<insert id="AddProduct" parameterType="com.project.model.Product" useGeneratedKeys="true" keyProperty="p_id">
+		INSERT INTO product(
+		p_name,p_price,p_category,p_duedate,p_recruitdate,p_createdate,p_nickname_m_fk
+		)
+		VALUES(
+		#{p_name}
+		,#{p_price}
+		,#{p_category}
+		,#{p_duedate}
+		,#{p_recruitdate}
+		,now()
+		,#{p_nickname_m_fk}
+		)
+	</insert>
+
+	<insert id="AddOption" parameterType="com.project.model.Option">
+
+		INSERT INTO opt(
+		<if test='opt_option2 != null'>
+			opt_pid_p_fk,opt_option1,opt_option2,opt_quantity
+			) VALUES(
+			#{opt_pid_p_fk},#{opt_option1},#{opt_option2},#{opt_quantity}
+			)
+		</if>
+		<if test='opt_option2 == null'>
+			opt_pid_p_fk,opt_option1,opt_quantity
+			) VALUES(
+			#{opt_pid_p_fk},#{opt_option1},#{opt_quantity}
+			)
+		</if>
+	</insert>
+	<insert id="AddDiscount" parameterType="com.project.model.Discount">
+		INSERT INTO discount(
+		dis_count,dis_pid_p_fk,dis_quantity
+		) VALUES(
+		#{dis_count},#{dis_pid_p_fk},#{dis_quantity}
+		)
+	</insert>
+
+	<insert id="AddImg" parameterType="com.project.model.Img">
+		INSERT INTO Img(
+		img_name,img_origname,img_pid_p_fk,img_keyword)
+		VALUES(
+		#{img_name},#{img_origname},#{img_pid_p_fk},#{img_keyword}
+		)
+	</insert>
+	<!-- ===================================ADD 부분======================================== -->
+
+	<!-- ===================================CREATE EVENT 부분======================================== -->
+
+	<update id="CreateNewEvent" parameterType="String">
+		${value}
+	</update>
+	<!-- ===================================CREATE EVENT 부분======================================== -->
+	<!-- ===================================제품 수정======================================== -->
+	<update id="UpdateProduct" parameterType="com.project.model.Product">
+		UPDATE product SET
+		p_name=#{p_name},p_price=#{p_price},p_category=#{p_category}
+		,p_recruitdate=#{p_recruitdate},p_duedate=#{p_duedate} WHERE p_id=#{p_id}
+	</update>
+	<update id="UpdateImg" parameterType="com.project.model.Img">
+		UPDATE img SET img_name=#{img_name},img_origname=#{img_origname} WHERE img_id=#{img_id}
+	</update>
+
+
+
+
+	<!-- ===================================제품 수정======================================== -->
+
+	<!-- ===================================제품 삭제======================================== -->
+
+	<delete id="DeleteDiscount" parameterType="int">
+		delete from discount WHERE dis_pid_p_fk=#{dis_pid_p_fk}
+	</delete>
+
+	<update id="modifyQuantity" parameterType="com.project.model.Option">
+		UPDATE opt SET opt_quantity=#{opt_quantity} WHERE opt_id=#{opt_id}
+	</update>
+	<update id="removeProduct" parameterType="int">
+		UPDATE product AS p, discount AS d, img AS i ,opt AS o
+		SET
+		p.p_chk='remove',d.dis_chk='remove',i.img_chk='remove',o.opt_chk='remove'
+		WHERE
+		p.p_id=#{p_id} AND d.dis_pid_p_fk=#{p_id} AND i.img_pid_p_fk=#{p_id}
+		AND o.opt_pid_p_fk=#{p_id}
+	</update>
+	<!-- ===================================제품 삭제======================================== -->
+
+
+	<delete id="OptionRemoveProduct" parameterType="int">
+		DELETE FROM product WHERE p_id=#{p_id}
+	</delete>
+
+	<delete id="OptionRemove" parameterType="com.project.model.Option">
+		DELETE FROM opt WHERE opt_option1=#{opt_option1} AND opt_pid_p_fk=#{opt_pid_p_fk}
+	</delete>
+	<delete id="OneOptionRemove" parameterType="int">
+		DELETE FROM opt WHERE opt_id=#{opt_id}
+	</delete>
+</mapper>

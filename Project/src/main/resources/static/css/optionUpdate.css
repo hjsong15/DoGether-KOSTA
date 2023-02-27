@@ -1,0 +1,203 @@
+#container {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	position: relative;
+}
+
+#option_update_con {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex-direction: column;
+	padding-top: 170px;
+}
+.opt_pbox{
+	width:500px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 10px;
+}
+.form_text {
+	width: 100%;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 20px;
+}
+
+.type_btn_box {
+	width: 800px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.type_btn_box button {
+	width: 200px;
+	height: 40px;
+	border: 1px solid #e2e2e2;
+	margin-top: 50px;
+	border-radius: 10px;
+}
+
+.type_btn_box button:hover {
+	background-color: #4285F4;
+	color: white;
+}
+
+.option_form {
+	width: 900px;
+	height: 300px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	margin-top: 100px;
+	border: 1px solid #e2e2e2;
+	border-radius: 20px;
+}
+
+.option_form button, .option_form_1 button {
+	margin-right: 20px;
+	width: 150px;
+	height: 30px;
+	border: 3px solid #e2e2e2;
+	font-size: 16px;
+	border-radius:10px;
+	width: 150px;
+	margin-bottom: 20px;
+}
+
+.option_form_1 {
+	width: 900px;
+	height: 300px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	margin-top: 100px;
+	border: 1px solid #e2e2e2;
+	border-radius: 20px;
+}
+
+.opt_box {
+	width: 1000px;
+	height: 250px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.opt_tag {
+	width: 300px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+.opt_tag span{
+	height: 30px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+}
+.opt_tag span button {
+	margin-left: 5px;
+	width: 25px;
+	height: 20px;
+	border: 1px solid #e2e2e2;
+	border-radius: 5px;
+	background-color: #4285F4;
+	color: white;
+}
+
+.opt_null_up {
+	display: none;
+}
+
+.opt_tag input {
+	margin: 5px;
+	width: 150px;
+	height: 20px;
+	border: 2px solid #e2e2e2;
+}
+
+.optadd_btn {
+	width: 100%;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.option_list_form {
+	width: 1000px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex-direction: column;
+}
+
+.opt_box1 {
+	width: 900px;
+	height: 270px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 45px;
+	box-shadow: 0px 0px 5px 7px #eeffff;
+}
+
+.opt_box2 {
+	width: 500px;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 45px;
+	box-shadow: 0px 0px 5px 7px #c0c0c0;
+}
+
+.opt_tag1 {
+	flex-direction: column;
+	width: 250px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.opt_tag1 input {
+	width: 150px;
+	margin: 5px;
+}
+
+.optlist_btn {
+	width: 150px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#Updateoption_btn {
+	width: 100px;
+	height: 35px;
+	border: 2px solid #e2e2e2;
+	border-radius: 10px;
+}
+
+#Updateoption_btn:hover {
+	background-color: blue;
+	opacity: 0.8;
+	color: white;
+}

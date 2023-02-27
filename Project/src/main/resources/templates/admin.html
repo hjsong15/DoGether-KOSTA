@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/css/admin.css}" rel="stylesheet" />
+<link th:href="@{/css/reset2.css}" rel="stylesheet" />
+<link th:href="@{/css/reset.css}" rel="stylesheet" />
+<title>admin page</title>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+	<div id="container">
+		<header id="admin_hed_con">
+
+			<div class="header_logo_box">
+				<a href="/index">
+					<img src="/projectimg/KakaoTalk_20230208_164726185.png">
+				</a>
+			</div>
+
+			<div class="admin_logo">
+				<h3 class="logo_1">Admin</h3>
+				<h3>Page</h3>
+			</div>
+
+
+			<div class="header_search_box">
+				<form class="search_form" action="/admin/result" method="get">
+					<select class="search_form_select" name="search">
+						<option value="p_name">판매글검색</option>
+						<option value="m_nickname">회원검색</option>
+					</select>
+					<input type="search" name="searchText" class="search_form_text">
+					<button type="submit" class="search_img">
+						<span class="material-symbols-outlined"> search </span>
+					</button>
+				</form>
+
+			</div>
+		</header>
+
+
+		<main id="admin_main_con">
+			<div class="admin_list_text"></div>
+			<div class="admin_list_box">
+
+				<div class="admin_list_product">
+					<div class="admin_product_text">
+						<p>판매글목록</p>
+					</div>
+
+					<div class="proudct_tag">
+						<span class="tag2">상품명</span>
+						<span class="tag1">판매자</span>
+						<span class="tag1">제품번호</span>
+						<span class="tag1">가격</span>
+						<span class="tag1 tag3">카테고리</span>
+					</div>
+					<div class="content_box">
+						<form th:each="pro:${product}" class="product_cotent">
+							<span th:text="${pro.p_name}" class="con_tag2"></span>
+							<span th:text="${pro.p_nickname_m_fk}" class="con_tag1"></span>
+							<span th:text="${pro.p_id}" class="con_tag1"> </span>
+							<span th:text="${pro.p_price}" class="con_tag1"></span>
+							<span th:text="${pro.p_category}" class="con_tag1"></span>
+						</form>
+					</div>
+				</div>
+
+				<div class="admin_list_member">
+					<div class="admin_product_text">
+						<p>회원목록</p>
+					</div>
+
+					<div class="member_tag">
+						<span class="tag1">닉네임</span>
+						<span class="tag2">이메일</span>
+						<span class="tag2">전화번호</span>
+						<span class="tag1">캐시</span>
+						<span class="tag2">생성일</span>
+						<span class="tag1 tag3">타입</span>
+					</div>
+					<div class="content_box">
+
+						<form th:each="mem,numStat:${member}" class="member_cotent">
+							<span th:text="${mem.m_nickname}" class="con_tag1"></span>
+							<span th:text="${mem.m_email}" class="con_tag2"></span>
+							<span th:text="${mem.m_tel}" class="con_tag2"></span>
+							<span th:text="${mem.m_cash}" class="con_tag1"></span>
+							<span th:text="${date[numStat.index]}" class="con_tag2"></span>
+							<span th:text="${mem.m_type}" class="con_tag1 tag4"></span>
+						</form>
+
+					</div>
+				</div>
+
+
+
+
+
+
+
+
+			</div>
+		</main>
+	</div>
+
+	<footer id="admin_foot_con"> </footer>
+
+</body>
+
+
+
+</html>

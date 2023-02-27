@@ -1,0 +1,419 @@
+@font-face {
+	font-family: 'OTWelcomeRA';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
+#container {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	position: relative;
+}
+
+#mypage_main_con {
+	position:relative;
+	font-family: 'OTWelcomeRA';
+	width: 100%;
+	padding-top: 170px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.mypage_box {
+	width: 1000px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.mypage_bar {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	width: 150px;
+	height: 500px;
+	flex-direction: column;
+}
+
+.mypage_bar_logo {
+	width: 150px;
+	height: 100px;
+	background-color: #7618F1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 18px;
+	font-weight: bold;
+	color: white;
+	border-right: 1px solid #e2e2e2;
+}
+
+.mypage_bar_list {
+	width: 150px;
+	height: 400px;
+	background-color: #F6F6F6;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.bar_list1 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100px;
+	height: 200px;
+	flex-direction: column;
+	border-bottom: 1px solid #e2e2e2;
+}
+
+.bar_list1:last-child {
+	border-bottom: 0px;
+}
+
+.bar_list1 li span {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.bar_list1 li a {
+	margin: 5px;
+}
+
+/*=========================mypage 좌측 작은 메뉴완료===========================*/
+.mypage_text_box {
+	width: 850px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex-direction: column;
+}
+
+.mypage_status_bar {
+	width: 850px;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #7618F1;
+	font-size: 16px;
+}
+
+.status_bar {
+	width: 200px;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	color: white;
+	border-right: 2px solid #e2e2e2;
+}
+
+.status_bar_2 {
+	width: 450px;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.status_bar_2_text1, .status_bar_2_text2 {
+	width: 450px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	color:white;
+}
+
+.status_bar_2_text1 span, .status_bar_2_text2 span {
+	margin-left: 20px;
+}
+
+.status_bar_2_text1 {
+	border-bottom: 1px solid #e2e2e2;
+}
+/*=================상단 메뉴바===================*/
+.select_form{
+	width:800px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+.tag_select{
+	width:150px;
+	height: 30px;
+	border:2px solid #e2e2e2;
+	border-radius: 5px;
+	color:#7618F1;
+}
+/*=======================검색창==========================*/
+#chart1 {
+	width: 700px;
+	height: 200px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.mypage_list {
+	width: 850px;
+	margin-top: 50px;
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-start;
+	flex-direction: column;
+} /* 리스트 길이 1250px */
+.mypage_tagbar {
+	width: 820px;
+	height: 50px;
+	display: flex;
+	border: 1px solid #e2e2e2;
+	justify-content: center;
+	align-items: center;
+} /* 리스트 버튼 50px */
+.tagbar_menu {
+	width: 205px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #e2e2e2;
+}
+
+.tagbar_menu a {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+/*============================배송,예정,판매중박스====================================*/
+.buymember_list_cont {
+	margin-top: 50px;
+	width: 820px;
+	border: 1px solid #e2e2e2;
+	padding-bottom: 20px;
+	border-radius: 15px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.buymember_list_box {
+	margin-top: 27px;
+	width: 750px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	margin-bottom: 10px;
+}
+
+.buymember_boxlist {
+	margin-top: 20px;
+	width: 750px;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 14px;
+}
+
+.buymember_content {
+	width: 700px;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	border: 2px solid #e2e2e2;
+	border-radius: 10px;
+}
+
+.PostBtn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-left: 10px;
+	width: 50px;
+	height: 30px;
+}
+
+.PostCoad_txtBtn {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 10px;
+	border: 1px solid #7618F1;
+	border-radius: 5px;
+	background-color: #7618F1;
+	color: white;
+}
+
+.PostCoad_EndBtn {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 10px;
+	border: 1px solid black;
+	border-radius: 5px;
+	background-color: GRAY;
+	color: white;
+}
+
+
+.buy_topbox {
+	width: 700px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-bottom: 1px solid #e2e2e2;
+}
+
+.buy_toptag1 {
+	width: 400px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.tag span {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.buy_toptag2 {
+	border-left: 1px solid #e2e2e2;
+	width: 150px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.buy_botbox {
+	width: 700px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.buy_tag2 {
+	width: 125px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.buy_tag1 {
+	width: 275px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.paging_btn {
+	width: 500px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.paging_btn p {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.paging_btn p span {
+	margin: 5px;
+}
+
+.paging_btn p a {
+	margin: 5px;
+}
+
+
+#PostCodeModal{
+	top:250px;
+	z-index:10;
+	background-color:black;
+	opacity:0.7;
+	position:fixed;
+	width:400px;
+	height:300px;
+	display:none;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+#PostCodeModal button{
+	color:white;
+	width:100px;
+	height: 30px;
+	border:2px solid #e2e2e2;
+	border-radius: 10px;
+}
+.PostCodeModal_text{
+	width:300px;
+	height:200px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.PostCodeModal_text span{
+	color:white;
+	width:300px;
+	height: 50px;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.PostCodeModal_text input{
+	width: 200px;
+	height: 30px;
+	border:2px solid #e2e2e2;
+	border-radius: 5px;
+	padding-left: 15px;
+}
+.PostCodeModal_text select {
+	margin-top:15px;
+	width:200px;
+	height: 30px;
+	border:2px solid #e2e2e2;
+	border-radius: 5px;	
+	
+}
+
+

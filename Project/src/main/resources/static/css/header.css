@@ -1,0 +1,256 @@
+#header_con {
+	font-family: 'OTWelcomeRA';
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-bottom: 1px solid #e2e2e2;
+	position: fixed;
+	background: #fff;
+	top: 0;
+	z-index: 99;
+	
+}
+
+.header_con_box {
+	border-right: 1px solid #e2e2e2;
+	width: 1200px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.header_category_box {
+	position: relative;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 110px;
+	height: 100px;
+	background-color: #7618F1;
+	flex-direction: column;
+	color:white;
+}
+
+.header_category_box span {
+	margin: 5px;
+}
+
+.category_drop_menu {
+	top: 85px;
+	width: 150px;
+	position: absolute;
+	background-color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid #e2e2e2;
+	border-radius: 20px;
+	z-index: 99;
+}
+
+.category_drop_menu li {
+	z-index: 99;
+	width: 100%;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.category_drop_menu li a {
+	font-size: 14px;
+	font-weight: bold;
+	z-index: 4;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.hide {
+	display: none;
+	visibility: hidden;
+}
+
+/*============================카테고리 완료=============================*/
+.header_logo_box {
+	width: 230px;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: 'Black Han Sans', sans-serif;
+}
+
+.header_logo_box a {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}
+
+.header_logo_box a img {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.color1 {
+	color: red;
+}
+
+.color2 {
+	color: blue;
+}
+
+.color3 {
+	color: yellow;
+}
+
+/*==============================로고자리=======================================*/
+.header_search_box {
+	width: 500px;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.search_form {
+	border: 5px solid #7618F1;
+	width: 500px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.search_form_select {
+	font-size: 12px;
+	width: 120px;
+	height: 30px;
+	border: 0;
+	border-right: 1px solid #e2e2e2;
+}
+
+.search_form_text {
+	padding-left: 10px;
+	width: 350px;
+	height: 30px;
+	border: 0;
+}
+
+.search_img {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 30px;
+	height: 30px;
+}
+
+/*===========================마이페이지,장바구니 드랍=========================*/
+.header_mymenu {
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+.hedaer_idname {
+	width: 160px;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.header_icon {
+	width: 160px;
+	height:70px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+
+
+.header_mymenu_drop, .header_mymenu_drop2 {
+	position: relative;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 80px;
+	flex-direction: column;
+	z-index: 99;
+}
+
+.mymenu_drop_menu1 li, .mymenu_drop_menu2 li {
+	width: 100%;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 99;
+}
+
+.mymenu_drop_menu1 a, .mymenu_drop_menu2 a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	font-size: 14px;
+	font-weight: bold;
+	z-index: 99;
+}
+
+.hide {
+	display: none;
+	visibility: hidden;
+}
+
+.mymenu_drop_menu2 {
+	top: 70px;
+	left: 15px;
+	width: 100px;
+	position: absolute;
+	background-color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid #e2e2e2;
+	border-radius: 20px;
+	flex-direction: column;
+	z-index: 99;
+}
+
+.mymenu_drop_menu1 {
+	width: 150px;
+	position: absolute;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid #e2e2e2;
+	border-radius: 20px;
+	top: 70px;
+	right: -15px;
+	z-index: 99;
+}
+
+.category_drop_menu li:hover, .mymenu_drop_menu1 li:hover,
+	.mymenu_drop_menu2 li:hover {
+	border-radius: 20px;
+	opacity: 0.8;
+	background-color: #4285F4;
+}
+
+.mymenu_text {
+	font-size: 14px;
+}

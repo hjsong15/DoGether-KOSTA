@@ -1,0 +1,226 @@
+@import
+	url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css")
+	;
+
+h1,main,h3 {
+display:flex;
+justify-content: center;
+align-items:center;
+
+
+
+}
+
+h1{
+	height:200px;
+	width: 400px;
+		padding-top: 30px;
+		margin: 0 auto;
+		margin-top:150px;
+}
+
+
+main {
+	width: 400px;
+	padding-top: 10px;
+	margin: 0 auto;
+}
+h3,#agree{
+	
+	font-family: 'Dongle', sans-serif;	
+}
+#agree{
+	font-size:1.5em;
+	color:#5e5e5e;
+}
+
+
+#joinForm {
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 20px;
+	padding-bottom: 20px
+}
+
+li {
+	border: 1px solid #ccc;
+	background: #fff;
+	/*li내에 있는 span의 크기를 자유롭게 하기 위해 작성 ..좌우크기나  배치등*/
+	display: flex;
+	flex-row: nowrap;
+	margin-bottom: 10px;
+	position: relative;
+}
+
+.error {
+	color: red;
+	padding: 5px;
+	font-size: 0.80rem;
+	display: none;
+	border:0;
+}
+
+.img {
+	border-right: 1px solid #ccc;
+	background-color: #f5f5f5;
+	padding: 10px;
+}
+
+
+#timer{
+	padding-right:10px;
+	    margin-top: 10px;
+	 font-size: 0.80rem;
+}
+
+#m_email{
+	width:320px;
+	height: 40px;
+	border: 0;
+	padding-left: 10px;
+	font-size:14px;
+}
+#m_code{
+	width:285px;
+	height: 40px;
+	border: 0;
+	padding-left: 10px;
+	font-size:14px;
+}
+#m_pwd,#m_pwd2{
+	width:350px;
+	height: 40px;
+	border: 0;
+	padding-left: 10px;
+	font-size:14px;
+}
+#m_name {
+	width: 400px;
+	height: 40px;
+	border: 0;
+	padding-left: 10px;
+	font-size:14px;
+}
+
+#code_send {
+	background: #8080c0;
+	width: 70px;
+	height: 30px;
+	color: #ffffff;
+	padding: 5px 5px 5px 5px;
+	/*box-shadow: 0 2px 0 #400080; /*x축 y축 선명도 */
+	justify-content: flex-end;
+	font-size:10px;
+}
+
+#code_check {
+	background: #8080c0;
+	width: 70px;
+	height: 30px;
+	color: #ffffff;
+	padding: 5px 5px 5px 5px;
+	/*box-shadow: 0 2px 0 #400080; /*x축 y축 선명도 */
+	justify-content: flex-end;
+	font-size:10px;
+	    margin-top: 5px;
+}
+
+input::placeholder {
+	font-size: 0.87em;
+	color: #aaa;
+}
+
+.show-hide, .show-hide2 {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	right: 15px;
+	padding-top: 10px;
+}
+
+input[type=radio] {
+	margin-left: 30px;
+	width: 14px;
+	height: 30px;
+	padding: 10px;
+	border-radius: 100%;
+	border:0;
+}
+
+/*#join_y { appearance: none; } /*input checkbox 숨기기*/
+#join_y {
+	padding-left:21px;
+	appearance: none;
+	padding-bottom:50px;
+	
+		
+}
+
+/*before나 after는 content나 display안주면 대상이 안보인다! */
+#join_y+span::before {
+	
+	background-color: #fff;
+	border: 1px solid #ccc;
+	content: '';
+	display: inline-block;
+	width: 17px;
+	height: 17px;
+	background-image: url(../images/icon.svg);
+	background-position: -65px -22px;
+	margin-left: 5px;
+	margin-right:5px;
+}
+
+#join_y:checked+span::before {
+	/*	background: pink ;*/
+	/*background는 통합속성이라 앞의 값들을 모두 가림. 그래서 여기서 적용시 앞에 백그라운드의 포지션,이미지값들을 다 덮어버림. 응 ?되는 것 같은데? 색이 연해서 보이는 건가?*/
+	background-image: url(../images/icon.svg);
+	background-position: -84px -21px;
+}
+
+
+.terms::after { /*after: 가상 자식 선택자.. 뒤쪽으로*/
+	content: '';
+	display: inline-block;
+	width: 8px;
+	height: 15px;
+	background-image: url(../images/icon.svg);
+	background-position: -104px -21px; /*한이미지에 여러이미지가 묶여있기에 위치(X,Y)를 알아야함*/
+	margin-left: 5px;
+}
+
+#join_btn {
+	margin-left: 10px;
+	width: 100%;
+	color: #fff;
+	padding: 20px ;
+	border:none;
+	font-size:14px;
+	border-radius:15px;
+	background: #7799CE;
+	background: -moz-linear-gradient(45deg, #7799CE 0%, #2C13A4 72%, #8F7DC5 100%);
+	background: -webkit-linear-gradient(45deg, #7799CE 0%, #2C13A4 72%, #8F7DC5 100%);
+	background: linear-gradient(45deg, #7799CE 0%, #2C13A4 72%, #8F7DC5 100%);
+}
+
+.login_link {
+	margin-left: 10px;
+	border: 1px solid #ccc;
+	color: #0074e9;
+	display: block;
+	border-radius:15px;
+	text-align: center;
+	font-size:14px;
+	background: #fff;
+	padding: 20px 0;
+	width: 100%;
+	box-shadow: 0 2px 0 #eee;
+	margin-top: 10px;
+}
+
+
+footer {
+	color: #333;
+	text-align: center;
+	font-size: 0.85rem;
+	margin-top: 20px
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link th:href="@{/css/header.css}" rel="stylesheet" />
+<link th:href="@{/css/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/chart.css}" rel="stylesheet" />
+<link th:href="@{/css/reset2.css}" rel="stylesheet" />
+<link th:href="@{/css/reset.css}" rel="stylesheet" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script type="text/javascript" th:src="@{/js/header.js}"></script>
+<script type="text/javascript" th:src="@{/js/chart.js}"></script>
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+  	const c=/*[[${allChart}]]*/"";		
+  	const WeekSell=c.WeekSell;
+  	const Week=c.Week;
+  	const Day=c.Day;
+  	const Month=c.Month;
+  	const MonthCategoryList=c.MonthCategory;								
+  	const MonthFailPro=c.MonthFailPro;
+  	const NowAllSell=c.NowAllSell;
+  	const NowAllProduct=c.NowAllProduct;
+  	const NowEndSellMoney=c.NowEndSellMoney;
+  	
+	window.onload = () => {
+		WeekList(Week,Day);
+		WeekSellList(WeekSell,Day);
+		MonthCategory(MonthCategoryList,Month);
+		MonthFailProList(MonthFailPro,Month);
+}
+/*]]>*/
+</script>
+
+</head>
+<body>
+
+
+	<div id="container">
+		<header th:replace="header :: header"> </header>
+		<main id="chart_main_con">
+			<div class="chart_text_box">
+				<div class="chart_text">
+					<span>오늘 판매건</span>
+					<a href="javascript:void(0);" class="atag" id="NowAllSell">
+						<span th:text="|${#lists.size(allChart['NowAllSell'])}개|"></span>
+					</a>
+				</div>
+				
+				<div class="chart_text">
+					<span>오늘 종료되는 공고</span>
+					<a href="javascript:void(0);" class="atag" id="NowAllProduct">
+						<span th:text="|${#lists.size(allChart['NowAllProduct'])}개|"></span>
+					</a>
+				</div>
+			
+			</div>
+
+			<div class="chart_box">
+				<div class="chart_btn btn1">
+					<a th:href="|/products/charts/-14 DAY/${allChart['Month']}|">2주일 평균 보기</a>
+					<a th:href="|/products/charts/-7 DAY/${allChart['Month']}|">최근 일주일 평균 보기</a>
+				</div>
+
+				<div class="chart_line">
+					<div class="type text1">
+						<span class="circle_txt1"> </span>
+						<canvas id="type1" width="450" height="250" class="chart"></canvas>
+					</div>
+					<div class="type text2">
+						<span class="circle_txt1"></span>
+						<canvas id="type2" width="450" height="250" class="chart"></canvas>
+					</div>
+				</div>
+
+
+				<div class="chart_btn">
+					<a th:href="|/products/charts/${allChart['Day']}/-6 MONTH|">최근 6개월 통계보기</a>
+					<a th:href="|/products/charts/${allChart['Day']}/-1 MONTH|">최근 한달 통계보기</a>
+				</div>
+				<div class="chart_line">
+					<div class="type type_circle" id="text3">
+						<span class="circle_txt1 ctxt1">한달간 카테고리별 판매량</span>
+						<canvas id="type3" width="450" height="200" class="chart"></canvas>
+					</div>
+					<div class="type type_circle" id="text4">
+						<span class="circle_txt2 ctxt2">한달간 공고 진행 현황 </span>
+						<canvas id="type4" widht="350" height="150" class="chart"></canvas>
+					</div>
+				</div>
+
+
+			</div>
+			<div class="chart_modal_con">
+				<div class="chart_modal_text">
+					<h2>상세 정보</h2>
+				</div>
+				<div class="chart_modal_box"></div>
+			</div>
+
+		</main>
+
+		<footer th:replace="footer ::footer"></footer>
+
+	</div>
+
+
+
+</body>
+</html>

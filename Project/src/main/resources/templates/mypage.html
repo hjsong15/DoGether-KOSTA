@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+<title>Insert title here</title>
+<link th:href="@{/css/header.css}" rel="stylesheet" />
+<link th:href="@{/css/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/mypage.css}" rel="stylesheet" />
+<link th:href="@{/css/reset2.css}" rel="stylesheet" />
+<link th:href="@{/css/reset.css}" rel="stylesheet" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script type="text/javascript" th:src="@{/js/header.js}"></script>
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+const chart=/*[[${chart}]]*/"";	
+	  window.onload = () => {
+		  findAllPost();
+		WeekList(chart);
+	}
+	  function findAllPost(){
+			  const list =/*[[${sellerProductList.list}]]*/"";// PagingResponse의 멤버인 List<T> 타입의 list를 의미
+		  if ( !list.length ) { //리스트가 비어있는 경우, "검색 결과가 없다"는 메시지를 행에 출력
+			  $(".mypage_list_cont").html('<td colspan="6"><div className="no_data_msg">검색된 결과가 없습니다.</div></td>');
+			  drawPage(); 
+		  }
+		  const pagination = /*[[${sellerProductList.pagination}]]*/"";//PagingResponse의 멤버인 pagination을 의미
+			const img=/*[[${img}]]*/"";
+			const keyword=/*[[${keyword}]]*/"";
+		 	const params =/*[[${params}]]*/""; // @ModelAttribute로 바로 1ㄷ1 맵핑시킨 값을 받아옴
+		 	drawList(list,img,keyword);
+			drawPage(pagination,params);
+	  }		
+/*]]>*/
+</script>
+<script type="text/javascript" th:src="@{/js/mypage.js}"></script>
+</head>
+
+<body>
+	<div id="container">
+		<header th:replace="header :: header"> </header>
+		<main id="mypage_main_con">
+			<div class="mypage_box">
+				<div class="mypage_bar">
+					<div class="mypage_bar_logo">
+						<span>판매자 관리페이지</span>
+					</div>
+					<div class="mypage_bar_list">
+						<ul class="bar_list1">
+							<li><span>-제품관리-</span>
+							<li><a href="/products/start/lists">판매중</a>
+							<li><a href="/products/endprice/lists">판매완료</a>
+							<li><a href="/products/add/lists">판매예정</a>
+							<li><a href="/products/endprice/lists">판매종료</a>
+						</ul>
+						<ul class="bar_list1">
+							<li><span>-판매관리-</span>
+							<li><a href="/products/charts/-7 DAY/-1 MONTH">판매 통계</a>
+							<li><a href="/products/all/lists/buy">판매정보</a>
+						</ul>
+
+					</div>
+
+				</div>
+				<div class="mypage_text_box">
+					<div class="mypage_status_bar">
+						<label class="status_bar">
+							<span> 판매 완료된 공고 수 </span>
+							<span th:text="|${sellerTotalCount['sellCount']}개|"></span>
+						</label>
+						<label class="status_bar">
+							<span> 판매된 제품의 총합 </span>
+							<span th:text="|${sellerTotalCount['totalSell']}개|"></span>
+						</label>
+
+						<div class="status_bar_2">
+							<div class="status_bar_2_text1">
+								<th:block th:if="${sellerTotalCount['sellMoney']}!=0">
+									<span th:text="|총 판매액:${#numbers.formatInteger(sellerTotalCount['sellMoney'], 3, 'COMMA') + '원'}|"></span>
+								</th:block>
+								<th:block th:if="${sellerTotalCount['sellMoney']}==0">
+									<span th:text="|총 판매액:|"></span>
+								</th:block>
+							</div>
+							<div class="status_bar_2_text2">
+								<span>보유캐시:</span>
+							</div>
+						</div>
+					</div>
+
+
+
+					<form class="mypage_search" th:action="|/products/${keyword}/lists|" method="GET">
+						<div class="mypage_text">
+							<span>페이지별 제품 검색</span>
+						</div>
+						<div class="mypage_saerchbox">
+							<input type="search" name="searching" placeholder="검색할 제품 입력">
+
+							<button type="submit">검색</button>
+
+						</div>
+					</form>
+
+					<div id="chart1">
+						<canvas id="myChart" width="500" height="200"></canvas>
+					</div>
+
+
+					<div class="mypage_list">
+						<div class="mypage_tagbar">
+							<label class="tagbar_menu">
+								<a href="/products/endprice/lists">
+									<span>판매종료</span>
+								</a>
+							</label>
+							<label class="tagbar_menu">
+								<a href="/products/start/lists">
+									<span>판매중</span>
+								</a>
+							</label>
+							<label class="tagbar_menu">
+								<a href="/products/add/lists">
+									<span>판매예정</span>
+								</a>
+							</label>
+							<label class="tagbar_menu">
+								<a href="/products/all/lists">
+									<span>모든제품</span>
+								</a>
+							</label>
+						</div>
+
+						<div class="mypage_list_cont"></div>
+
+
+
+					</div>
+					<div class="paging_btn"></div>
+				</div>
+
+
+			</div>
+
+
+			<div class="Modal_Option">
+				<form class="modal_option_form">
+					<div class="modal_text">
+						<p>해당 상품 재고 현황</p>
+						
+						<span>본 페이지는 재고 수정만 가능합니다. 옵션에 대한 수정은 수정 페이지를 이용하세요</span>
+					</div>
+					<div class="modal_header">
+						<div class="mo_head_tag1">옵션1</div>
+						<div class="mo_head_tag2">옵션2</div>
+						<div class="mo_head_tag3">남은재고</div>
+					</div>
+					<div class="modal_con_box"></div>
+					<div class="modal_opt_btnbox">
+						<button type="button" id="quantityBtn">재고 수정</button>
+					</div>
+				</form>	
+
+			</div>
+		</main>
+
+		<footer th:replace="footer ::footer"></footer>
+
+	</div>
+</body>
+
+</html>

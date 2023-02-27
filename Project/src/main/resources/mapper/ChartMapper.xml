@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.ChartMapper">
+
+
+	<select id="OneWeekChart" resultType="com.project.model.Chart" parameterType="String">
+		SELECT DATE_FORMAT(DATE(o.o_date), '%m-%d') AS dateTxt, count(*) AS
+		count , p.p_nickname_m_fk AS nickname FROM ord AS o LEFT OUTER JOIN product AS p
+		ON o.o_product_p_fk=p.p_id where p_nickname_m_fk=#{p_nickname_m_fk}
+		AND p_chk='endprice' AND DATE(o_date) >= DATE_ADD(NOW(), INTERVAL ${Day}) GROUP BY
+		dateTxt,nickname ORDER BY dateTxt ASC;
+
+	</select>
+
+	<select id="OneWeekSellPrice" resultType="com.project.model.Chart" parameterType="String">
+		SELECT DATE_FORMAT(DATE(o.o_date), '%m-%d') AS dateTxt,
+		count(o.o_product_p_fk) AS count, sum(p.p_endprice) AS endprice , p_nickname_m_fk AS nickname FROM ord AS o LEFT OUTER JOIN product AS p
+		ON
+		o.o_product_p_fk=p.p_id where p.p_id=o.o_product_p_fk AND p_chk='endprice' AND DATE(o.o_date) >= DATE_ADD(NOW(), INTERVAL ${Day}) AND
+		p_nickname_m_fk=#{p_nickname_m_fk} GROUP BY p.p_nickname_m_fk,dateTxt ORDER BY dateTxt ASC
+	</select>
+
+	<select id="OneMonthCategorySell" resultType="com.project.model.Chart" parameterType="String">
+		SELECT sum(o.o_quantity)AS count, p.p_category AS
+		category FROM ord AS o LEFT OUTER JOIN product AS p
+		ON o.o_product_p_fk=p.p_id where
+		p.p_id=o.o_product_p_fk AND p_chk='endprice' AND DATE(o.o_date)
+		>= DATE_ADD(NOW(), INTERVAL ${Day}) AND p_nickname_m_fk=#{p_nickname_m_fk} GROUP
+		BY category order by count asc
+	</select>
+
+	<select id="OneMonthFailedProduct" resultType="com.project.model.Chart" parameterType="String">
+		SELECT count(*)AS count,p_chk AS category FROM product
+		where DATE(p_duedate)>=DATE_ADD(NOW(), INTERVAL ${Day}) AND p_nickname_m_fk=#{p_nickname_m_fk} AND (p_chk='failed' OR
+		p_chk='endprice') GROUP BY
+		category order by count asc
+	</select>
+
+	<select id="NowAllSell" resultType="HashMap" parameterType="String">
+
+		SELECT o.o_id,p.p_name,p.p_chk,o.o_option1,o.o_option2,o.o_quantity
+		FROM ord AS o
+		LEFT JOIN product AS p
+		ON p.p_id=o.o_product_p_fk WHERE
+		p.p_nickname_m_fk=#{p_nickname_m_fk} AND o.o_product_p_fk=p.p_id
+		AND
+		date_format(o.o_date,"%m-%d")=DATE_FORMAT(now(),"%m-%d") group by o.o_id,p.p_name,p.p_chk,o.o_option1,o.o_option2,o.o_quantity
+	</select>
+
+	<select id="NowAllProduct" resultType="HashMap" parameterType="String">
+		SELECT p_id,p_name,DATE_FORMAT(p_duedate,"%Y년%m월%d일 %H시 %i분")AS p_duedate,p_sell,case when p_chk = 'failed' then "판매량 미달"
+		when p_chk = 'start' then "판매중" when p_chk = 'add' then "공고시작전" when p_chk ='endprice' then "정산완료" end AS p_chk FROM product WHERE
+		DATE(p_duedate)=DATE_FORMAT(NOW(),"%Y-%m-%d") AND p_nickname_m_fk=#{p_nickname_m_fk} GROUP BY
+		p_id,p_name,p_duedate,p_sell,p_category
+	</select>
+
+	<select id="NowEndSellMoney" parameterType="String" resultType="HashMap">
+		SELECT p.p_name,p.p_endprice,p.p_sell,o.o_quantity,o.o_date FROM Product AS p
+		LEFT JOIN ord AS o ON p.p_id=o.o_product_p_fk WHERE DATE(o.o_date)=DATE_FORMAT(now(), "%Y-%m-%d")
+		AND p.p_chk='endprice' AND
+		p.p_nickname_m_fk=#{p_nickname_m_fk}
+	</select>
+</mapper>

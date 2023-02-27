@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>search result</title>
+<link th:href="@{/css/reset2.css}" rel="stylesheet" />
+<link th:href="@{/css/reset.css}" rel="stylesheet" />
+<link th:href="@{/css/result.css}" rel="stylesheet" />
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+<title>admin page</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<th:block th:if="${productresult}!=null">
+		<div class="proudct_tag">
+			<span class="tag1">상품명</span>
+			<span class="tag1">판매자</span>
+			<span class="tag1">제품번호</span>
+			<span class="tag1">가격</span>
+			<span class="tag1">카테고리</span>
+			<span class="tag3">관리</span>
+		</div>
+		<form th:action="|/admin/product/${pro.p_id}|" th:method="delete" th:each="pro:${productresult}" class="product_cotent">
+			<span th:text="${pro.p_name}" class="tag1"></span>
+			<span th:text="${pro.p_nickname_m_fk}" class="tag1"></span>
+			<span th:text="${pro.p_id}" class="tag1"> </span>
+			<span th:text="${pro.p_price}" class="tag1"></span>
+			<span th:text="${pro.p_category}" class="tag1"></span>
+			<button type="submit" class="pro_del_btn">삭제</button>
+		</form>
+	</th:block>
+
+
+	<th:block th:if="${memberresult}!=null">
+		<div class="member_tag">
+			<span class="tag1">닉네임</span>
+			<span class="tag2">이메일</span>
+			<span class="tag2">전화번호</span>
+			<span class="tag1">캐시</span>
+			<span class="tag2">생성일</span>
+			<span class="tag1">타입</span>
+			<span class="tag3">관리</span>
+		</div>
+		<form th:action="|/admin/member/${mem.m_id}|" th:method="delete" th:each="mem,numStat:${memberresult}" class="member_cotent">
+			<span th:text="${mem.m_nickname}" class="tag1"></span>
+			<span th:text="${mem.m_email}" class="tag2"></span>
+			<span th:text="${mem.m_Tel}" class="tag2"></span>
+			<span th:text="${mem.m_cash}" class="tag1"></span>
+			<span th:text="${date[numStat.index]}" class="tag2"></span>
+			<span th:text="${mem.m_type}" class="tag1"></span>
+
+			<button type="submit" class="mem_del_btn" >블랙</button>
+		</form>
+	</th:block>
+
+
+
+
+
+</body>
+</html>

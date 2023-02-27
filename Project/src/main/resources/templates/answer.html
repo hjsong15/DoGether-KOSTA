@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link th:href="@{/css/header.css}" rel="stylesheet" />
+<link th:href="@{/css/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/qnaboard.css}" rel="stylesheet" />
+<link th:href="@{/css/reset2.css}" rel="stylesheet" />
+<link th:href="@{/css/qnaBoard.css}" rel="stylesheet" />
+<link th:href="@{/css/reset.css}" rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/header.js}"></script>
+
+</head>
+<body>
+	<header th:replace="header :: header"> </header>
+	<div id="container">
+		<br>
+		<div id="questionRead_area">
+<!-- 			<form enctype="multipart/form-data" method="get"> -->
+			<div id="qna_id" class="qna_show">
+				<span th:text="|주문 번호 : ${questionMap['qnaModel'].getQ_id}|"></span>
+			</div>
+
+			<div id="qna_product" class="qna_show">
+				<span th:text="|상품명 : ${questionMap['qnaModel'].getQ_name_p_fk}|"></span>
+			</div>
+
+			<div id="qna_date" class="qna_show">
+				<span th:text="|작성날짜 : ${questionMap['qnaModel'].getQ_date}|"></span>
+			</div>
+
+			<div id="qna_title" class="qna_show">
+				<span th:text="|제목 : ${questionMap['qnaModel'].getQ_title}|"></span>
+			</div>
+
+			<div id="qna_content" class="qna_show">
+				<span th:text="|내용 : ${questionMap['qnaModel'].getQ_content}|"></span>
+			</div>
+
+			<div th:if="${questionMap['qnaModel'].getQ_answer}!=null">
+				<span th:text="|답변 : ${questionMap['qnaModel'].getQ_answer}|"></span>
+			</div>
+			<div th:if="${questionMap['qnaModel'].getQ_answer}!=null">
+				<span th:text="|답변 : ${questionMap['qnaModel'].getQ_answer}|"></span>
+			</div>
+
+<!-- 			</form> -->
+			<div id="write_answer_area">
+				<form th:action="@{/qnaboard/answer/}+${questionMap['qnaModel'].getQ_id}"
+					th:method="post">
+					<div class="write_answer"></div>
+					<div id="in_content">
+						<textarea name="q_answer" id="q_answer" rows="30" cols="55"
+							placeholder="답변" required></textarea>
+					</div>
+					<div class="bt_se">
+						<button type="submit">답변 작성</button>
+					</div>
+				</form>
+			</div>
+
+		</div>
+
+		<footer th:replace="footer ::footer"></footer>
+	</div>
+</body>
+</html>

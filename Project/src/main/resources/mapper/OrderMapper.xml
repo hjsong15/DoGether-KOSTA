@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.OrderMapper">
+
+	<insert id="AddCart" parameterType="com.project.model.Order">
+		INSERT INTO
+		ord(o_product_p_fk, o_member_m_fk,o_date, o_quantity, o_option1,
+		o_option2,o_state) values
+		(
+		#{o_product_p_fk}
+		,#{o_member_m_fk}
+		,now()
+		,#{o_quantity}
+		,#{o_option1}
+		,#{o_option2}
+		,'장바구니'
+		)
+	</insert>
+	<resultMap type="com.project.model.Order" id="Order">
+		<id property="o_id" column="o_id" />
+		<result property="o_quantity" column="o_quantity" />
+		<result property="o_product_p_fk" column="o_product_p_fk" />
+		<result property="o_member_m_fk" column="o_member_m_fk" />
+		<result property="o_recipient" column="o_recipient" />
+		<result property="o_state" column="o_state" />
+		<result property="o_dstate" column="o_dstate" />
+		<result property="o_option1" column="o_option1" />
+		<result property="o_option2" column="o_option2" />
+		<result property="o_date" column="o_date" />
+		<result property="o_postCode" column="o_postCode" />
+		<result property="o_postCompanyKey" column="o_postCompanyKey" />
+		<collection property="img" column="o_product_p_fk"
+			javaType="java.lang.String" ofType="com.project.model.Img"
+			select="getImg" />
+		<collection property="product" column="o_product_p_fk"
+			javaType="java.lang.String" ofType="com.project.model.product"
+			select="findProduct" />
+
+
+	</resultMap>
+
+	<resultMap type="com.project.model.Product" id="Product">
+		<id property="p_id" column="p_id" />
+		<result property="p_name" column="p_name" />
+		<result property="p_nickname_m_fk" column="p_nickname_m_fk" />
+		<result property="p_duedate" column="p_duedate" />
+		<result property="p_recruitdate" column="p_recruitdate" />
+		<result property="p_price" column="p_price" />
+	</resultMap>
+
+	<resultMap type="com.project.model.Img" id="Img">
+		<result property="img_name" column="img_name" />
+		<result property="img_origname" column="img_origname" />
+	</resultMap>
+
+	<select id="findProduct" parameterType="int" resultMap="Product">
+		SELECT *
+		FROM product WHERE
+		p_id=#{o_product_p_fk}
+	</select>
+
+	<select id="getImg" resultMap="Img" parameterType="int">
+		SELECT
+		img_name,img_origname FROM
+		img WHERE img_pid_p_fk=#{o_product_p_fk} AND
+		img_keyword = 'p_img' ORDER BY img_id
+		LIMIT 0,1
+	</select>
+
+
+	<select id="findCart" resultMap="Order" parameterType="int">
+		SELECT *
+		FROM ord WHERE o_member_m_fk=#{o_member_m_fk} AND o_state='장바구니'
+	</select>
+
+
+
+	<select id="buyList" resultMap="Order" parameterType="hashMap">
+		SELECT *
+		FROM ord WHERE o_member_m_fk=#{o_member_m_fk} AND o_state='구매완료'
+		LIMIT
+		#{limitstart},#{recordsize}
+	</select>
+
+
+	<select id="buyListCount" resultType="int" parameterType="int">
+		SELECT
+		count(*)
+		FROM ord WHERE o_member_m_fk=#{o_member_m_fk} AND
+		o_state='구매완료'
+
+	</select>
+
+	<select id="findMember" resultType="int" parameterType="String">
+		SELECT ifnull(m_id,0) AS m_id
+		FROM member WHERE m_email=#{m_email}
+	</select>
+
+
+
+	<update id="cartBuyItem" parameterType="int">
+		update ord AS o, product
+		AS p
+		SET
+		o.o_state='구매완료', o.o_dstate='배송준비중',
+		o.o_quantity=#{o_quantity},
+		p.p_sell=p.p_sell+#{o_quantity}
+		WHERE
+		o.o_id=#{o_id} AND
+		p.p_id=o.o_product_p_fk;
+	</update>
+
+
+	<delete id="delCartItem" parameterType="int">
+		DELETE from ord
+		WHERE
+		o_id=#{o_id}
+	</delete>
+
+
+	<!-- 장바구니에 동일한 상품이 있는지 확인 -->
+	<select id="countCart" resultType="int">
+		select ifnull(count(*),0)
+		FROM ord
+		WHERE
+		o_member_m_fk=#{o_member_m_fk}
+		AND o_product_p_fk=#{o_product_p_fk}
+		AND
+		o_state='장바구니'
+	</select>
+
+
+
+
+	<update id="PostCodeAdd" parameterType="com.project.model.Order">
+		UPDATE ord SET o_postCode=#{o_postCode},o_postCompanyKey=#{o_postCompanyKey} WHERE o_id=#{o_id}
+	</update>
+
+
+</mapper>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+<title>Insert title here</title>
+
+<link th:href="@{/css/header.css}" rel="stylesheet" />
+<link th:href="@{/css/footer.css}" rel="stylesheet" />
+<link th:href="@{/css/productdetail.css}" rel="stylesheet" />
+<link th:href="@{/css/reset2.css}" rel="stylesheet" />
+<link th:href="@{/css/reset.css}" rel="stylesheet" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+<script type="text/javascript" th:src="@{/js/header.js}"></script>
+<script type="text/javascript" th:src="@{/js/productdetail.js}"></script>
+
+</head>
+
+<body>
+	<div id="container">
+		<header th:replace="header :: header"> </header>
+		<main id="prodetail_main_con">
+
+			<div class="prodetail_box">
+				<div class="prodetail_img_box">
+					<div class="pro_categorybox" th:text="|카테고리 ( ${findProductMap['findProduct'].getP_category} )|"></div>
+					<div class="prodetail_img">
+						<div class="prodetail_img_mini">
+							<img th:src="|/projectimg/${i.img_name}|" class="mini_img" th:each="i : ${findProductMap['findProduct'].getImg}"
+								th:if="${i.img_keyword}=='p_img' AND ${i.img_keyword}!=null">
+
+
+						</div>
+						<div class="prodetail_img_big">
+							<img src="" class="big_img">
+						</div>
+					</div>
+					<div class="prodetail_progress">
+						<label class="progress_text">
+							<span>현재 할인 적용</span>
+						</label>
+						<label class="progress_bar">
+							<progress id="progress1" th:value="${findProductMap['findProduct'].getP_sell}" th:max="${findProductMap['nextDiscountSell']}"></progress>
+
+							<span th:text="|${findProductMap['findProduct'].getP_sell}/${findProductMap['nextDiscountSell']}|"
+								th:if="${findProductMap['findProduct'].getP_sell}<${findProductMap['nextDiscountSell']}"></span>
+							<span th:text="|달성완료|" th:if="${findProductMap['findProduct'].getP_sell}>=${findProductMap['nextDiscountSell']}"></span>
+						</label>
+
+
+						<label class="progress_quantity">
+							<span th:text="|공구 시작일:${findProductMap['findProduct'].getP_recruitdate}|">시작일: </span>
+							<span th:text="|공구 마감일:${findProductMap['findProduct'].getP_duedate}|">마감일: </span>
+						</label>
+
+
+						<label class="progress_quantity">
+							<span th:each="quantity, Stat:${findProductMap['findProduct'].getDiscount}" th:text="|${Stat.count}차 할인:${quantity.dis_quantity}개|">1차
+								할인:20개</span>
+						</label>
+						<label class="progress_quantity">
+							<span th:each="count , Stat:${findProductMap['findProduct'].getDiscount}" th:text="|${Stat.count}차 할인율:${count.dis_count}%|">1차 할인:20개</span>
+						</label>
+						<label class="progress_sail">
+							<span th:text="|현재 할인 적용:${findProductMap['nowDiscount']}%|">현재 할인 적용: 20%</span>
+						</label>
+
+					</div>
+				</div>
+
+
+
+
+
+				<div class="prodetail_text_box">
+					<div class="prodetail_text text1">
+						<span th:text="|제품명: ${findProductMap['findProduct'].getP_name}|"></span>
+
+
+					</div>
+					<div class="prodetail_text price_text">
+						<span class="price" th:text="|기본 가격:${#numbers.formatInteger(findProductMap['findProduct']['p_price'], 3, 'COMMA') + '원'}|"></span>
+						<span class="disprice" th:text="|현재 할인 가격:${#numbers.formatInteger(findProductMap['discountPrice'], 3, 'COMMA') + '원'}|"></span>
+					</div>
+					<div class="prodetail_text">
+						<span th:text="|판매자:${findProductMap['findProduct'].getP_nickname_m_fk}|"></span>
+					</div>
+
+					`
+
+
+					<div class="prodetail_text text2">
+						<input type="hidden" th:value="${findProductMap['findProduct'].getP_id}" id="p_id">
+						<select name="opt_option1" class="option1">
+							<option th:value="${opt1.opt_option1}" th:each="opt1 : ${findProductMap['findProduct']['option']}"
+								th:if=" ${findProductMap['findProduct']['option']}!=null" th:text="${opt1.opt_option1}"></option>
+						</select>
+					</div>
+					<div class="prodetail_text text2" id="option2">
+						<select name="opt_option2" class="option2">
+						</select>
+					</div>
+					<div class="prodetail_text text2" id="quantity">
+						<p class="option_quanity">선택한 옵션의 남은 수량 :</p>
+					</div>
+
+
+					<form class="prodetail_btn_box" th:method="get" th:action="|/ordersheet|">
+						<input type="hidden" th:value="${#authentication.name}" class="login_chk">
+						<input type="hidden" th:value="${findProductMap['findProduct'].getP_id}" name="o_product_p_fk">
+						<input type="hidden" name="o_option1">
+						<input type="hidden" name="o_option2">
+						<select name="o_quantity">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+						</select>
+						<button type="button" id="addCart">장바구니 추가</button>
+						<button type="submit" id="purchase">구매하기</button>
+						<input type="hidden" th:value="${findProductMap['findProduct'].getP_recruitdate}" id="p_recruitdate" readonly>
+						<input type="hidden" th:value="${findProductMap['findProduct'].getP_duedate}" id="p_duedate" readonly>
+					</form>
+					<div class="time_box">
+						<h1 id="time"></h1>
+					</div>
+
+				</div>
+			</div>
+
+
+
+
+
+
+			<div class="detail_seller_box">
+				<div class="detail_seller_tag">
+					<h2>카테고리 Best</h2>
+				</div>
+
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide" th:each="best:${findProductMap['categoryBest']}" th:if="${!#lists.isEmpty(findProductMap['categoryBest'])}">
+							<a th:href="|/products/${best['p_id']}|">
+								<img th:src="|/projectimg/${best['img_name']}|">
+							</a>
+							<div class="seller_best_text">
+								<span th:text="|가격: ${best['p_price']}"></span>
+								<span th:text="|제품명: ${best['p_name']}"></span>
+							</div>
+						</div>
+
+					</div>
+					<div class="swiper-button-next"></div>
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-pagination"></div>
+				</div>
+
+			</div>
+
+			<div class="detail_seller_menu_box">
+				<div class="detail_menu">
+					<a href="#ProductText"> 상세정보 </a>
+				</div>
+				<div class="detail_menu">
+					<a href="#revf"> Review() </a>
+				</div>
+				<div class="detail_menu">
+					<a th:href="|/qnaboard/list/${findProductMap['findProduct'].getP_id}|">Q&A</a>
+				</div>
+				<div class="detail_menu">
+					<a href="#SellBest">판매자 BEST</a>
+				</div>
+			</div>
+
+
+
+
+
+
+			<div class="detail_content_box">
+				<h2 id="ProductText">제품 상세 정보</h2>
+				<div class="box" th:each="i : ${findProductMap['findProduct'].getImg}" th:if="${i.img_keyword}=='p_contentimg' AND ${i.img_keyword}!=null">
+					<img th:src="|/projectimg/${i.img_name}|">
+				</div>
+
+			</div>
+
+
+			<div class="review_form" id="revf">
+				<label class="pro_review_tag" th:if="${reviewstar!=null && reviewct!=null}">
+					<p th:text="|판매자 후기(${reviewct})개|" id="rvcnt"></p>
+					<p th:text="| 평점(${reviewstar})|" id="rvstar"></p>
+				</label>
+				<form class="addReview" action="/addReview" method="post" id="addReview" enctype="multipart/form-data">
+					<input type="hidden" name="r_pnickname_m_fk" id="r_pnickname_m_fk" th:value="${findProductMap['findProduct'].p_nickname_m_fk}">
+					<input type="hidden" name="p_id" id="p_id" th:value="${p_id}">
+
+					<div class="star_box">
+						<span class="star">
+							★★★★★
+							<span>★★★★★</span>
+							<input type="range" name="r_rating" id="r_rating" oninput="drawStar(this)" value="0" step="0.5" min="0" max="5">
+						</span>
+						<span class="text-bold">별점을 선택해주세요</span>
+					</div>
+
+					<div class="review_textbox">
+						<textarea placeholder="리뷰를 작성 하세요" name="r_content" id="r_content"></textarea>
+						<label class="reviewimg_box">
+							<span>이미지 등록</span>
+							<input type="file" multiple="multiple" name="r_img" id="r_img" style="display: none;" data-name="리뷰 이미지">
+						</label>
+						<button type="button" id="review_btn">등록</button>
+					</div>
+
+				</form>
+
+				<div class="review_box"></div>
+
+				<div class="btn_box"></div>
+
+
+			</div>
+
+
+			<div class="detail_seller_box">
+				<div class="detail_seller_tag">
+					<h2 id="SellBest">판매자 Best</h2>
+				</div>
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide" th:each="best:${findProductMap['sellerBest']}" th:if="${!#lists.isEmpty(findProductMap['sellerBest'])}">
+							<a href="#">
+								<img th:src="|/projectimg/${best['img_name']}|">
+							</a>
+							<div class="seller_best_text">
+								<span th:text="|가격: ${best['p_price']}"></span>
+								<span th:text="|제품명: ${best['p_name']}"></span>
+							</div>
+						</div>
+
+					</div>
+					<div class="swiper-button-next"></div>
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-pagination"></div>
+				</div>
+
+			</div>
+
+		</main>
+
+		<footer th:replace="footer ::footer"></footer>
+
+	</div>
+
+
+</body>
+
+</html>
