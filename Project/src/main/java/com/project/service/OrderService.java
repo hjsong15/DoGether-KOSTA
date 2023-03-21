@@ -53,7 +53,7 @@ public class OrderService {
 
 	}
 
-	// 구매내역
+	// 구매내역 & 페이징처리
 	public PagingResponse<Order> buyList(String o_nickname, SearchDto params) {
 		int o_member_m_fk = oMapper.findMember(o_nickname);
 		int count = 0;

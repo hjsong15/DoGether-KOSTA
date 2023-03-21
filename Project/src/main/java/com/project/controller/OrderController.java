@@ -29,6 +29,7 @@ public class OrderController {
 
 	private final OrderService oService;
 
+	// 장바구니에 상품 추가 -> INSERT
 	@ResponseBody
 	@PostMapping("/carts")
 	public String AddCart(Principal principal, Order order) {
@@ -44,7 +45,8 @@ public class OrderController {
 		}
 
 	}
-
+	
+	//장바구니에 내역 뿌려주기 -> READ
 	@GetMapping("/carts")
 	public String findCart(Model model, Principal principal) {
 		String m_nickname = principal.getName();
@@ -55,6 +57,7 @@ public class OrderController {
 		return "cart";
 	}
 
+	//장바구니에서 구매 -> UPDATE
 	@PutMapping("/carts")
 	public String cartBuyItem(int[] o_id, int[] o_quantity) {
 		for (int i = 0; i < o_id.length; i++) {
@@ -63,6 +66,7 @@ public class OrderController {
 		return "redirect:/orders/carts";
 	}
 
+	//장바구니에서 삭제 -> DELETE
 	@ResponseBody
 	@DeleteMapping("/carts")
 	public void delCartItem(int chk) {
@@ -89,12 +93,14 @@ public class OrderController {
 		return "buylist";
 	}
 
-	// 배송조회 페이지로 전환 하는 메소드
+	// 배송조회 페이지로 전환하는 메소드
 	@GetMapping("/delivery")
 	public String delivery() {
 		return "delivery";
 	}
 
+	
+	
 	@ResponseBody
 	@PostMapping("/{o_id}/posts")
 	public String PostCodeAdd(Order o) {
