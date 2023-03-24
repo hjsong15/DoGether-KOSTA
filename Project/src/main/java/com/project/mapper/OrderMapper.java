@@ -12,7 +12,7 @@ import com.project.model.Order;
 @Mapper
 public interface OrderMapper {
 	
-	// 장바구니에 추가
+	//장바구니 추가
 	void AddCart(Order oid);
 
 	// 장바루니 목록
@@ -32,7 +32,7 @@ public interface OrderMapper {
 	int buyListCount(int o_member_m_fk);
 
 	// 장바구니에 동일한 상품이 있는지 확인
-	int countCart(Map<String, Object> map);
+	int countCart(Order o);
 
 	void PostCodeAdd(Order o);
 
