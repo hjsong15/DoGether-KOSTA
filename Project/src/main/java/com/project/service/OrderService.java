@@ -25,7 +25,10 @@ public class OrderService {
 
 	private final OrderMapper oMapper;
 
-	// 장바구니에 아이템 추가 -> insert
+	/* 장바구니에 상품 추가 - INSERT
+	 * 
+	 * 
+	 * */
 	public void AddCart(Principal principal, Order order) {
 		String m_nickname = principal.getName();
 		int o_member_m_fk = oMapper.findMember(m_nickname);
