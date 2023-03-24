@@ -26,7 +26,7 @@ public class OrderService {
 	private final OrderMapper oMapper;
 
 	/* 장바구니에 상품 추가 - INSERT
-	 * 
+	 * test1
 	 * 
 	 * */
 	public void AddCart(Principal principal, Order order) {
